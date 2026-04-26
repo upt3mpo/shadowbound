@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aura of Attrition | Shadowbound Priest Origin</title>
+    <style>
+      :root {
+        --bg: #080607;
+        --bg-deep: #030203;
+        --panel: #130d10;
+        --panel-soft: #1b1115;
+        --blood: #8f1f1f;
+        --blood-dark: #4b0d0d;
+        --ember: #d08a37;
+        --ash: #c8bbb0;
+        --muted: #8f827a;
+        --void: #7d4fd6;
+        --light: #d6c08a;
+        --line: rgba(208, 138, 55, 0.22);
+        --shadow-line: rgba(125, 79, 214, 0.26);
+        --max: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(
+            circle at 50% 0%,
+            rgba(143, 31, 31, 0.28),
+            transparent 34rem
+          ),
+          radial-gradient(
+            circle at 80% 16%,
+            rgba(125, 79, 214, 0.12),
+            transparent 28rem
+          ),
+          linear-gradient(
+            180deg,
+            #10090b 0%,
+            var(--bg) 34%,
+            var(--bg-deep) 100%
+          );
+        color: var(--ash);
+        font-family: Georgia, "Times New Roman", serif;
+        line-height: 1.72;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px
+          );
+        background-size: 48px 48px;
+        mask-image: linear-gradient(to bottom, black, transparent 92%);
+        opacity: 0.28;
+        z-index: -1;
+      }
+
+      .hero {
+        min-height: 86vh;
+        display: grid;
+        place-items: center;
+        padding: 5rem 1.25rem 4rem;
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        width: 62rem;
+        height: 62rem;
+        border-radius: 50%;
+        background:
+          radial-gradient(
+            circle,
+            transparent 0 31%,
+            rgba(214, 192, 138, 0.08) 31.3% 31.8%,
+            transparent 32.1%
+          ),
+          radial-gradient(circle, rgba(125, 79, 214, 0.14), transparent 58%);
+        filter: blur(0.3px);
+        top: -22rem;
+        opacity: 0.75;
+      }
+
+      .hero-inner {
+        width: min(var(--max), 100%);
+        position: relative;
+        z-index: 1;
+        text-align: center;
+      }
+
+      .kicker {
+        color: var(--ember);
+        text-transform: uppercase;
+        letter-spacing: 0.24em;
+        font:
+          700 0.78rem/1.4 Arial,
+          sans-serif;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(3rem, 9vw, 8.4rem);
+        line-height: 0.92;
+        letter-spacing: -0.06em;
+        color: #f0e4cf;
+        text-shadow:
+          0 0 24px rgba(143, 31, 31, 0.65),
+          0 0 62px rgba(125, 79, 214, 0.35);
+      }
+
+      .subtitle {
+        max-width: 720px;
+        margin: 1.5rem auto 0;
+        color: var(--muted);
+        font-size: clamp(1.05rem, 2vw, 1.35rem);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0.72rem 1rem;
+        color: #f3dec2;
+        text-decoration: none;
+        border: 1px solid rgba(208, 138, 55, 0.44);
+        background: linear-gradient(
+          180deg,
+          rgba(143, 31, 31, 0.55),
+          rgba(28, 12, 13, 0.75)
+        );
+        box-shadow: 0 0 22px rgba(143, 31, 31, 0.22);
+        font:
+          700 0.8rem/1 Arial,
+          sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .button.secondary {
+        background: rgba(8, 6, 7, 0.68);
+        border-color: rgba(125, 79, 214, 0.42);
+      }
+
+      .page {
+        width: min(var(--max), 100%);
+        margin: 0 auto;
+        padding: 3rem 1.25rem 6rem;
+      }
+
+      .meta-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        margin-bottom: 4rem;
+        border: 1px solid var(--line);
+        background: var(--line);
+      }
+
+      .meta-card {
+        background: rgba(13, 8, 10, 0.95);
+        padding: 1.1rem;
+        min-height: 110px;
+      }
+
+      .meta-card strong {
+        display: block;
+        color: var(--ember);
+        font:
+          700 0.73rem/1.3 Arial,
+          sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.13em;
+        margin-bottom: 0.45rem;
+      }
+
+      .meta-card span {
+        color: #eadcc8;
+        font-size: 1rem;
+      }
+
+      .chapter {
+        margin: 0 0 6rem;
+      }
+
+      .chapter-header {
+        margin-bottom: 1.8rem;
+        border-left: 3px solid var(--blood);
+        padding-left: 1rem;
+      }
+
+      .chapter-number {
+        color: var(--void);
+        font:
+          700 0.78rem/1 Arial,
+          sans-serif;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        margin: 0.25rem 0 0;
+        font-size: clamp(2rem, 5vw, 3.75rem);
+        line-height: 1;
+        color: #eadcc8;
+        letter-spacing: -0.04em;
+      }
+
+      .story-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: 2rem;
+        align-items: start;
+      }
+
+      .story {
+        font-size: 1.13rem;
+      }
+
+      .story p {
+        margin: 0 0 1.35rem;
+      }
+
+      .story .hard-line {
+        color: #f0e4cf;
+        font-size: 1.35rem;
+        line-height: 1.55;
+      }
+
+      .aside-stack {
+        display: grid;
+        gap: 1rem;
+        position: sticky;
+        top: 1rem;
+      }
+
+      .game-card {
+        background:
+          linear-gradient(180deg, rgba(32, 17, 21, 0.96), rgba(10, 7, 8, 0.96)),
+          radial-gradient(
+            circle at 100% 0%,
+            rgba(125, 79, 214, 0.18),
+            transparent 14rem
+          );
+        border: 1px solid var(--line);
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+          0 18px 48px rgba(0, 0, 0, 0.35);
+        padding: 1rem;
+      }
+
+      .game-card.void {
+        border-color: var(--shadow-line);
+        box-shadow: 0 0 34px rgba(125, 79, 214, 0.12);
+      }
+
+      .game-label {
+        color: var(--ember);
+        font:
+          800 0.7rem/1.4 Arial,
+          sans-serif;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        margin-bottom: 0.45rem;
+      }
+
+      .game-card h3 {
+        margin: 0 0 0.55rem;
+        color: #f4e8d8;
+        font-size: 1.2rem;
+        line-height: 1.2;
+      }
+
+      .game-card p,
+      .game-card li {
+        color: var(--muted);
+        font-size: 0.94rem;
+        line-height: 1.55;
+      }
+
+      .game-card ul {
+        margin: 0.65rem 0 0;
+        padding-left: 1.1rem;
+      }
+
+      .flavor {
+        color: #d4c0b4 !important;
+        font-style: italic;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 0.75rem;
+        margin-top: 0.8rem;
+      }
+
+      .dm-choice {
+        border: 1px solid rgba(125, 79, 214, 0.42);
+        background:
+          radial-gradient(
+            circle at 100% 0%,
+            rgba(125, 79, 214, 0.15),
+            transparent 12rem
+          ),
+          rgba(20, 11, 25, 0.78);
+        padding: 1rem;
+        font-family: Georgia, "Times New Roman", serif;
+        box-shadow: inset 0 0 18px rgba(125, 79, 214, 0.08);
+      }
+
+      .dm-choice strong {
+        color: #d8c4ff;
+        display: block;
+        margin-bottom: 0.6rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font:
+          800 0.72rem/1.4 Arial,
+          sans-serif;
+      }
+
+      .dm-choice p {
+        margin: 0 0 0.7rem;
+        color: var(--muted);
+        font-size: 0.96rem;
+        line-height: 1.6;
+      }
+
+      .dm-choice .spoken-choice {
+        color: #f0e4cf;
+        font-style: italic;
+        border-left: 2px solid rgba(208, 138, 55, 0.42);
+        padding-left: 0.75rem;
+      }
+
+      .choice {
+        display: inline-block;
+        margin-top: 0.75rem;
+        color: #fff0d6;
+        background: rgba(143, 31, 31, 0.45);
+        border: 1px solid rgba(208, 138, 55, 0.38);
+        padding: 0.42rem 0.7rem;
+        font:
+          700 0.78rem/1 Arial,
+          sans-serif;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .divider {
+        width: 100%;
+        height: 1px;
+        margin: 4rem 0;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--line),
+          transparent
+        );
+      }
+
+      .ending-card {
+        margin-top: 2rem;
+        padding: 2rem;
+        border: 1px solid rgba(208, 138, 55, 0.34);
+        background:
+          radial-gradient(
+            circle at 50% 0%,
+            rgba(143, 31, 31, 0.24),
+            transparent 22rem
+          ),
+          rgba(9, 6, 7, 0.92);
+        text-align: center;
+      }
+
+      .ending-card h2 {
+        font-size: clamp(2.2rem, 6vw, 5rem);
+      }
+
+      .ending-card p {
+        max-width: 780px;
+        margin: 1rem auto 0;
+        color: var(--muted);
+        font-size: 1.1rem;
+      }
+
+      @media (max-width: 900px) {
+        .meta-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .story-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .aside-stack {
+          position: static;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .hero {
+          min-height: 74vh;
+        }
+
+        .meta-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .story {
+          font-size: 1.04rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero" id="top">
+      <div class="hero-inner">
+        <div class="kicker">Shadowbound Priest Origin</div>
+        <h1>Aura of Attrition</h1>
+        <p class="subtitle">
+          He began by standing close to the suffering. He ended as the reason no
+          one could stand close to him.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="#story">Begin the Descent</a>
+          <a class="button secondary" href="#legend">View Character Legend</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="page" id="story">
+      <section class="meta-strip" aria-label="Character overview">
+        <div class="meta-card">
+          <strong>Class Fantasy</strong>
+          <span>Shadowbound Priest</span>
+        </div>
+        <div class="meta-card">
+          <strong>Core Conflict</strong>
+          <span>Salvation through corruption</span>
+        </div>
+        <div class="meta-card">
+          <strong>Primary Mechanic</strong>
+          <span>Power increases as proximity becomes lethal</span>
+        </div>
+        <div class="meta-card">
+          <strong>Alignment</strong>
+          <span>Unbound from Light and Shadow</span>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter I</div>
+          <h2>The Bell That Would Not Ring</h2>
+        </div>
+        <div class="story-grid">
+          <article class="story">
+            <p>Before the Veil, Father Ilyas believed in proximity.</p>
+            <p>
+              Stand close to the suffering. Lay hands upon them. Let the Light
+              pass through you.
+            </p>
+            <p>
+              The Cathedral of Dawn was built on that philosophy. Its pillars
+              were wide so the congregation could gather shoulder to shoulder.
+              Its hymns were written in harmonies, never solos.
+            </p>
+            <p>
+              On the morning the bells failed, the choir had been mid-verse.
+            </p>
+            <p>The first scream cut through stained glass.</p>
+            <p>The second shattered it.</p>
+            <p>
+              Black-veined parishioners clawed at pews, jaws distended, ribs
+              splitting outward as if something inside wanted air.
+            </p>
+            <p class="hard-line">
+              Ilyas ran toward them. He always ran toward them.
+            </p>
+            <p>
+              The child he baptized two weeks prior lunged first. Milk teeth
+              blackened. Fingers bone-thin and sharpened.
+            </p>
+            <p>“Father,” it gurgled, voice layered with something older.</p>
+            <p>
+              Ilyas raised his hand. White flame consumed the child. Ash coated
+              his lips.
+            </p>
+            <p>He told himself it was mercy.</p>
+            <p>
+              More rose. The courtyard became a furnace of prayer and bone.
+              Every burst of Light erased another face he recognized.
+            </p>
+            <p>The Light responded. But it did not keep pace.</p>
+            <p>When he collapsed to one knee, he did not pray for strength.</p>
+            <p>He prayed for efficiency.</p>
+          </article>
+
+          <aside class="aside-stack" aria-label="Gameplay notes for Chapter I">
+            <div class="game-card">
+              <div class="game-label">Encounter</div>
+              <h3>Ashen Courtyard</h3>
+              <p><strong>Enemy Type:</strong> Husked Devout</p>
+              <ul>
+                <li>
+                  Fallen civilians may rise as Voidbound if not cleansed within
+                  6 seconds.
+                </li>
+                <li>Repeated use of Light increases exhaustion stacks.</li>
+                <li>NPC casualties persist in later dialogue.</li>
+              </ul>
+            </div>
+            <div class="game-card">
+              <div class="game-label">Ability</div>
+              <h3>Radiant Severance</h3>
+              <p>
+                Channel Light in a focused arc. Undead struck are disintegrated.
+                Nearby allies gain minor restoration.
+              </p>
+              <p class="flavor">
+                “Mercy is clean only when seen from far away.”
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter II</div>
+          <h2>The Veil Beneath the Altar</h2>
+        </div>
+        <div class="story-grid">
+          <article class="story">
+            <p>The scriptures described the Veil as absence.</p>
+            <p>Darkness without purpose.</p>
+            <p>That was a lie.</p>
+            <p>The Veil hummed.</p>
+            <p>
+              It pulsed beneath the cathedral crypt in a fracture of stone like
+              a heartbeat that did not belong to the world.
+            </p>
+            <p>
+              Ilyas descended alone. Past sealed reliquaries. Past saints whose
+              bones had been polished by centuries of desperate fingers. Past
+              warnings carved so deep into stone that even dust avoided them.
+            </p>
+            <p>
+              The air grew cold not with temperature, but with distance. As if
+              warmth itself refused to follow.
+            </p>
+            <p>“You are not meant for this,” whispered memory.</p>
+            <p>“I am meant to stop it,” he answered.</p>
+            <p>He pressed his palm into the fracture.</p>
+            <p>Something inside the blackness pressed back.</p>
+            <p>Not teeth. Not claws.</p>
+            <p>Understanding.</p>
+          </article>
+
+          <aside class="aside-stack" aria-label="Gameplay notes for Chapter II">
+            <div class="dm-choice">
+              <strong>Dungeon Master Choice</strong>
+              <p>
+                The chamber grows still. The Light does not abandon you, but it
+                stops speaking first.
+              </p>
+              <p class="spoken-choice">
+                If Ilyas places his hand upon the fracture, he may draw from
+                what waits beneath the altar. The power will answer. It will not
+                leave cleanly.
+              </p>
+              <span class="choice">Place your hand upon the Veil</span>
+            </div>
+            <div class="game-card void">
+              <div class="game-label">Lore Object</div>
+              <h3>The Veil Fracture</h3>
+              <p>
+                A sealed wound beneath the Cathedral of Dawn. It does not speak
+                in words. It answers need with appetite.
+              </p>
+              <p class="flavor">
+                “Every forbidden door was built by someone who once believed it
+                should remain closed.”
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter III</div>
+          <h2>The First Borrowing</h2>
+        </div>
+        <div class="story-grid">
+          <article class="story">
+            <p>When the next incursion came, he did not raise both hands.</p>
+            <p>Only one.</p>
+            <p>
+              Shadow spilled through his veins like cold water. It did not burn
+              like Light. It settled. It filled empty spaces he had not known
+              existed.
+            </p>
+            <p>He reached for a Husk and did not sever it.</p>
+            <p>He pulled.</p>
+            <p>
+              Its corruption streamed into him, black threads unraveling into
+              his chest. The Husk withered, skin collapsing inward as if time
+              accelerated.
+            </p>
+            <p>The villagers behind him gasped.</p>
+            <p>The air around him dimmed.</p>
+            <p>He felt stronger than he ever had.</p>
+            <p>Three villagers fainted.</p>
+            <p>One did not wake.</p>
+            <p>They called it coincidence. They called him miracle-worker.</p>
+            <p>They did not stand too close.</p>
+          </article>
+
+          <aside
+            class="aside-stack"
+            aria-label="Gameplay notes for Chapter III"
+          >
+            <div class="game-card void">
+              <div class="game-label">Ability Acquired</div>
+              <h3>Grasp of the Veil</h3>
+              <p>
+                Drain life and corruption from enemies. Restores significant
+                health.
+              </p>
+              <ul>
+                <li>Nearby allies suffer minor vitality loss.</li>
+                <li>Damage increases against corrupted enemies.</li>
+                <li>
+                  Healing becomes less effective when used near civilians.
+                </li>
+              </ul>
+              <p class="flavor">
+                “He found a way to heal faster. The world learned to bleed
+                quietly.”
+              </p>
+            </div>
+            <div class="game-card">
+              <div class="game-label">NPC Reaction</div>
+              <h3>Miracle-Worker</h3>
+              <p>
+                Reputation increases with desperate factions. Trust decreases
+                with witnesses who survive repeated encounters.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter IV</div>
+          <h2>The Party That Faded</h2>
+        </div>
+        <div class="story-grid">
+          <article class="story">
+            <p>
+              The Church refused to abandon him. That would mean admitting
+              error.
+            </p>
+            <p>They assigned companions.</p>
+            <p>
+              Sir Albrecht, shield of the Dawn. Mira, novice hymnkeeper. Tovan,
+              mercenary with a laugh too loud for crypts.
+            </p>
+            <p>They descended into the catacombs together.</p>
+            <p>
+              The walls pulsed with wet rot. Hymns echoed off stone that seemed
+              to breathe.
+            </p>
+            <p>
+              Albrecht held the line. Mira sang, voice trembling but true. Tovan
+              cracked jokes until the first corpse on the wall opened its eyes.
+            </p>
+            <p>Ilyas felt the Rot creeping toward their hearts.</p>
+            <p>Light alone would not save them.</p>
+            <p>He widened himself.</p>
+            <p>The air folded inward. Shadow thickened like tar.</p>
+            <p>Malgeroth dissolved in convulsing shrieks.</p>
+            <p>So did Albrecht.</p>
+            <p>Armor clanged hollow to the stone floor.</p>
+            <p>
+              Mira’s hymn faltered mid-note. Her skin paled, veins darkening
+              beneath.
+            </p>
+            <p>She looked at him, not accusing. Confused.</p>
+            <p>“Father… why am I cold?”</p>
+            <p>The zone collapsed.</p>
+            <p>Silence replaced music.</p>
+          </article>
+
+          <aside class="aside-stack" aria-label="Gameplay notes for Chapter IV">
+            <div class="game-card">
+              <div class="game-label">Dungeon</div>
+              <h3>Spires Below the Basilica</h3>
+              <p><strong>Boss:</strong> Malgeroth, Choir of Rot</p>
+              <ul>
+                <li>Rot accumulates on all players.</li>
+                <li>Rot can be cleansed by sustained Radiant channeling.</li>
+                <li>
+                  Shadow abilities accelerate boss death but punish allied
+                  proximity.
+                </li>
+              </ul>
+            </div>
+            <div class="game-card void">
+              <div class="game-label">Ultimate</div>
+              <h3>Cathedral of Dusk</h3>
+              <p>
+                Create a zone of inverted sanctity. Enemies rapidly decay.
+                Allies inside suffer escalating degeneration.
+              </p>
+              <p class="flavor">
+                “The prayer was answered. The congregation was not spared.”
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter V</div>
+          <h2>The Social Cost</h2>
+        </div>
+        <div class="story-grid">
+          <article class="story">
+            <p>Inns grew quiet when he entered.</p>
+            <p>Candles shortened in their holders.</p>
+            <p>Children developed nosebleeds if he lingered too long.</p>
+            <p>
+              He learned to sit apart. He learned to speak less. He learned
+              which roads had no beggars on them.
+            </p>
+            <p>He told himself isolation was discipline.</p>
+            <p>It was easier than admitting relief.</p>
+            <p>When alone, his power sharpened. Focused. Efficient.</p>
+            <p>When alone, no one died unexpectedly.</p>
+            <p>He began to prefer it.</p>
+          </article>
+
+          <aside class="aside-stack" aria-label="Gameplay notes for Chapter V">
+            <div class="game-card void">
+              <div class="game-label">Passive Evolution</div>
+              <h3>Aura of Attrition</h3>
+              <p>
+                Your presence drains minor vitality from nearby allies. Effect
+                intensifies during Shadow abilities. Damage bonus when no allies
+                are present.
+              </p>
+              <p class="flavor">“Salvation has a radius.”</p>
+            </div>
+            <div class="game-card">
+              <div class="game-label">Social Mechanic</div>
+              <h3>Companion Decay</h3>
+              <ul>
+                <li>
+                  Long rests with party members reduce companion max health.
+                </li>
+                <li>NPCs may refuse escort quests.</li>
+                <li>Solo combat grants increased spell haste.</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter VI</div>
+          <h2>The Rift Over Karthain</h2>
+        </div>
+        <div class="story-grid">
+          <article class="story">
+            <p>The sky tore open above the capital.</p>
+            <p>
+              A wound of endless depth. Something vast pressed against its
+              edges, testing the seam of reality.
+            </p>
+            <p>The High Inquisitor knelt before him in the cathedral ruins.</p>
+            <p>“Lead us.”</p>
+            <p>
+              He looked at the soldiers assembled behind her. Their eyes were
+              steady. Hopeful.
+            </p>
+            <p>He stepped back.</p>
+            <p>“No.”</p>
+            <p>They went without him.</p>
+            <p>Most did not return.</p>
+            <p>When the third wave failed, the Inquisitor sought him again.</p>
+            <p>“You could have prevented this.”</p>
+            <p>He did not argue.</p>
+            <p>He walked toward the Rift alone.</p>
+          </article>
+
+          <aside class="aside-stack" aria-label="Gameplay notes for Chapter VI">
+            <div class="game-card">
+              <div class="game-label">Quest</div>
+              <h3>The Capital Must Not Fall</h3>
+              <p><strong>Recommended Party:</strong> 5</p>
+              <p><strong>Actual Party:</strong> 1</p>
+              <p class="flavor">
+                “Some heroes stand alone because they are brave. Others stand
+                alone because the alternative is worse.”
+              </p>
+            </div>
+            <div class="game-card void">
+              <div class="game-label">Moral State</div>
+              <h3>Detachment</h3>
+              <p>
+                Ilyas no longer evaluates choices by virtue. He evaluates
+                survivability, cost, and control.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter VII</div>
+          <h2>The Veiled Sovereign</h2>
+        </div>
+        <div class="story-grid">
+          <article class="story">
+            <p>The creature inside the tear was not monstrous in form.</p>
+            <p>It was absence shaped like intention.</p>
+            <p>
+              Limbs formed and unformed in layered silhouettes. Eyes blinked
+              where none had been moments before.
+            </p>
+            <p>“You have tasted us,” it said inside his skull.</p>
+            <p>“I have tasted necessity,” he replied.</p>
+            <p>The fight broke architecture.</p>
+            <p>
+              Stone dissolved into black sand. Towers bent inward. Bells rang
+              once, then aged into dust mid-swing.
+            </p>
+            <p>
+              Light flared from Ilyas’s left hand. Shadow coiled in his right.
+            </p>
+            <p>Neither sufficed.</p>
+            <p>He felt the familiar limitation of balance.</p>
+            <p>Balance required restraint.</p>
+            <p>Restraint cost lives.</p>
+            <p>He did not hesitate.</p>
+            <p>Shadow did not pour into him.</p>
+            <p>He dissolved into it.</p>
+            <p>
+              The Sovereign recoiled as Ilyas expanded, no longer conduit but
+              convergence.
+            </p>
+            <p>He did not strike.</p>
+            <p>He absorbed.</p>
+            <p>
+              The creature screamed as its vastness compressed into a
+              singularity within his chest.
+            </p>
+            <p>The Rift sealed.</p>
+            <p>The sky healed.</p>
+          </article>
+
+          <aside
+            class="aside-stack"
+            aria-label="Gameplay notes for Chapter VII"
+          >
+            <div class="game-card">
+              <div class="game-label">Final Encounter</div>
+              <h3>The Veiled Sovereign</h3>
+              <ul>
+                <li>Phase 1: Voidborne waves.</li>
+                <li>Phase 2: Environmental collapse.</li>
+                <li>Phase 3: Full Veil Synchronization choice.</li>
+              </ul>
+            </div>
+            <div class="dm-choice">
+              <strong>Dungeon Master Choice</strong>
+              <p>
+                The Sovereign opens inside your mind like a second sky. You can
+                still fight as a man. You can still lose as one.
+              </p>
+              <p class="spoken-choice">
+                If Ilyas stops resisting the Veil, he will not borrow its
+                darkness. He will become the place it enters the world.
+              </p>
+              <span class="choice">Stop resisting</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">Chapter VIII</div>
+          <h2>Aftermath</h2>
+        </div>
+        <div class="story-grid">
+          <article class="story">
+            <p>He stood in the quiet capital square.</p>
+            <p>No soldiers flanked him. No priests blessed him.</p>
+            <p>People watched from a distance.</p>
+            <p>A woman approached with a wounded child.</p>
+            <p>He knelt instinctively.</p>
+            <p>As he reached out, frost crept across the cobblestones.</p>
+            <p>The child’s breathing steadied.</p>
+            <p>The woman’s hands began to tremble uncontrollably.</p>
+            <p>He withdrew before she could collapse.</p>
+            <p>Understanding settled.</p>
+            <p>He could still save.</p>
+            <p>But saving would always cost something near him.</p>
+            <p>He no longer sought absolution.</p>
+            <p>He no longer feared condemnation.</p>
+            <p>He walked beyond the city gates without farewell.</p>
+          </article>
+
+          <aside
+            class="aside-stack"
+            aria-label="Gameplay notes for Chapter VIII"
+          >
+            <div class="game-card void">
+              <div class="game-label">Legendary Item</div>
+              <h3>Worldrender Crook</h3>
+              <p>Two-headed staff of Light and Shadow.</p>
+              <ul>
+                <li>+Shadow Power</li>
+                <li>+Spell Sustain</li>
+                <li>Unlocks Veil Synchronization dialogue options</li>
+              </ul>
+              <p class="flavor">
+                “He tried to save the world. The world simply stopped arguing
+                with him.”
+              </p>
+            </div>
+            <div class="game-card">
+              <div class="game-label">NPC Bark</div>
+              <h3>Capital Survivor</h3>
+              <p>“Do not thank him. Do not curse him. Let him pass.”</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <section class="ending-card" id="legend">
+        <div class="kicker">Legend Entry</div>
+        <h2>Ilyas, The Eclipse</h2>
+        <p>
+          <strong>Class:</strong> Shadowbound Priest &nbsp; | &nbsp;
+          <strong>Alignment:</strong> Unaffiliated &nbsp; | &nbsp;
+          <strong>Trait:</strong> Proximity drains vitality. Isolation amplifies
+          power.
+        </p>
+        <p><em>He began by fighting evil. He ended by redefining it.</em></p>
+      </section>
+    </main>
+  </body>
+</html>
