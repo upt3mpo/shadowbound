@@ -1,7 +1,7 @@
 # Aura of Attrition
 
-A dark fantasy short story presented as an interactive, Diablo-inspired narrative page.
-Built as a single-page experience combining storytelling + RPG systems + UI flavor text.
+A dark fantasy short story presented as an interactive, Diablo-inspired narrative experience.
+Built as a multi-page project combining storytelling, RPG systems, and UI-driven design.
 
 ---
 
@@ -11,35 +11,53 @@ https://upt3mpo.github.io/shadowbound/
 
 ---
 
+## Pages
+
+- Intro / Chapter I: https://upt3mpo.github.io/shadowbound/
+- Chapter II: https://upt3mpo.github.io/shadowbound/chapter-2.html
+- Chapter III: https://upt3mpo.github.io/shadowbound/chapter-3.html
+- Chapter IV: https://upt3mpo.github.io/shadowbound/chapter-4.html
+- Chapter V: https://upt3mpo.github.io/shadowbound/chapter-5.html
+- Chapter VI: https://upt3mpo.github.io/shadowbound/chapter-6.html
+- Chapter VII: https://upt3mpo.github.io/shadowbound/chapter-7.html
+- Chapter VIII: https://upt3mpo.github.io/shadowbound/chapter-8.html
+- Codex: https://upt3mpo.github.io/shadowbound/codex.html
+- System Details: https://upt3mpo.github.io/shadowbound/details.html
+
+---
+
 ## Overview
 
-Aura of Attrition follows Ilyas, a priest who begins as a servant of the Light and slowly transforms into something else entirely.
+Aura of Attrition follows Ilyas, a priest who begins as a servant of the Light and slowly transforms into something else entirely. The experience is presented as a structured narrative arc supported by explicit gameplay systems and design breakdowns.
 
-The page blends:
+The project blends:
 
-- Narrative storytelling (short story format)
-- RPG-inspired mechanics (abilities, encounters, items)
-- DND-style decision moments (Dungeon Master choices)
-- UI-style flavor text and system design elements
+- Narrative storytelling (chapter-based progression)
+- RPG-inspired mechanics (abilities, encounters, passives)
+- Systems-driven design (codex + detailed breakdowns)
+- UI-style presentation (flavor text, encounter framing)
 
 ---
 
 ## Features
 
-- Abilities, encounters, passives, items, NPC dialogue
-- Dungeon Master choice moments
-- Dark Diablo-inspired aesthetic
-- Responsive design
+- Full multi-page narrative (8 chapters)
+- Character design codex (identity, pillars, playstyles)
+- System breakdown (abilities, traits, tuning, mechanics)
+- Encounter-driven storytelling
+- Diablo-inspired aesthetic and tone
+- Responsive layout
 
 ---
 
 ## Purpose
 
-Portfolio piece for:
+Portfolio piece focused on:
 
 - Narrative Design
-- Game Design (ARPG/MMO)
-- Systems-driven storytelling
+- Game Design (RPG)
+- Systems Design
+- Character and gameplay design
 
 ---
 

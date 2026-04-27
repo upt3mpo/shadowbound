@@ -3,1949 +3,309 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aura of Attrition | Shadowbound Priest Origin</title>
-    <style>
-      :root {
-        --bg: #080607;
-        --bg-deep: #030203;
-        --panel: #130d10;
-        --panel-soft: #1b1115;
-        --blood: #8f1f1f;
-        --blood-dark: #4b0d0d;
-        --ember: #d08a37;
-        --ash: #c8bbb0;
-        --muted: #8f827a;
-        --void: #7d4fd6;
-        --light: #d6c08a;
-        --line: rgba(208, 138, 55, 0.22);
-        --shadow-line: rgba(125, 79, 214, 0.26);
-        --max: 1180px;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        background:
-          radial-gradient(
-            circle at 50% 0%,
-            rgba(143, 31, 31, 0.28),
-            transparent 34rem
-          ),
-          radial-gradient(
-            circle at 80% 16%,
-            rgba(125, 79, 214, 0.12),
-            transparent 28rem
-          ),
-          linear-gradient(
-            180deg,
-            #10090b 0%,
-            var(--bg) 34%,
-            var(--bg-deep) 100%
-          );
-        color: var(--ash);
-        font-family: Georgia, "Times New Roman", serif;
-        line-height: 1.72;
-      }
-
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        background-image:
-          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-          linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.018) 1px,
-            transparent 1px
-          );
-        background-size: 48px 48px;
-        mask-image: linear-gradient(to bottom, black, transparent 92%);
-        opacity: 0.28;
-        z-index: -1;
-      }
-
-      .hero {
-        min-height: 86vh;
-        display: grid;
-        place-items: center;
-        padding: 5rem 1.25rem 4rem;
-        position: relative;
-        overflow: hidden;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .hero::after {
-        content: "";
-        position: absolute;
-        width: 62rem;
-        height: 62rem;
-        border-radius: 50%;
-        background:
-          radial-gradient(
-            circle,
-            transparent 0 31%,
-            rgba(214, 192, 138, 0.08) 31.3% 31.8%,
-            transparent 32.1%
-          ),
-          radial-gradient(circle, rgba(125, 79, 214, 0.14), transparent 58%);
-        filter: blur(0.3px);
-        top: -22rem;
-        opacity: 0.75;
-      }
-
-      .hero-inner {
-        width: min(var(--max), 100%);
-        position: relative;
-        z-index: 1;
-        text-align: center;
-      }
-
-      .kicker {
-        color: var(--ember);
-        text-transform: uppercase;
-        letter-spacing: 0.24em;
-        font:
-          700 0.78rem/1.4 Arial,
-          sans-serif;
-        margin-bottom: 1rem;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: clamp(3rem, 9vw, 8.4rem);
-        line-height: 0.92;
-        letter-spacing: -0.06em;
-        color: #f0e4cf;
-        text-shadow:
-          0 0 24px rgba(143, 31, 31, 0.65),
-          0 0 62px rgba(125, 79, 214, 0.35);
-      }
-
-      .subtitle {
-        max-width: 720px;
-        margin: 1.5rem auto 0;
-        color: var(--muted);
-        font-size: clamp(1.05rem, 2vw, 1.35rem);
-      }
-
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.9rem;
-        justify-content: center;
-        margin-top: 2rem;
-      }
-
-      .button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 46px;
-        padding: 0.72rem 1rem;
-        color: #f3dec2;
-        text-decoration: none;
-        border: 1px solid rgba(208, 138, 55, 0.44);
-        background: linear-gradient(
-          180deg,
-          rgba(143, 31, 31, 0.55),
-          rgba(28, 12, 13, 0.75)
-        );
-        box-shadow: 0 0 22px rgba(143, 31, 31, 0.22);
-        font:
-          700 0.8rem/1 Arial,
-          sans-serif;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-      }
-
-      .button.secondary {
-        background: rgba(8, 6, 7, 0.68);
-        border-color: rgba(125, 79, 214, 0.42);
-      }
-
-      .page {
-        width: min(var(--max), 100%);
-        margin: 0 auto;
-        padding: 3rem 1.25rem 6rem;
-      }
-
-      .meta-strip {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1px;
-        margin-bottom: 4rem;
-        border: 1px solid var(--line);
-        background: var(--line);
-      }
-
-      .meta-card {
-        background: rgba(13, 8, 10, 0.95);
-        padding: 1.1rem;
-        min-height: 110px;
-      }
-
-      .meta-card strong {
-        display: block;
-        color: var(--ember);
-        font:
-          700 0.73rem/1.3 Arial,
-          sans-serif;
-        text-transform: uppercase;
-        letter-spacing: 0.13em;
-        margin-bottom: 0.45rem;
-      }
-
-      .meta-card span {
-        color: #eadcc8;
-        font-size: 1rem;
-      }
-
-      .chapter {
-        margin: 0 0 6rem;
-      }
-
-      .chapter-header {
-        margin-bottom: 1.8rem;
-        border-left: 3px solid var(--blood);
-        padding-left: 1rem;
-      }
-
-      .chapter-number {
-        color: var(--void);
-        font:
-          700 0.78rem/1 Arial,
-          sans-serif;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-      }
-
-      h2 {
-        margin: 0.25rem 0 0;
-        font-size: clamp(2rem, 5vw, 3.75rem);
-        line-height: 1;
-        color: #eadcc8;
-        letter-spacing: -0.04em;
-      }
-
-      .story-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) 360px;
-        gap: 2rem;
-        align-items: start;
-      }
-
-      .story {
-        font-size: 1.13rem;
-      }
-
-      .story p {
-        margin: 0 0 1.35rem;
-      }
-
-      .story .hard-line {
-        color: #f0e4cf;
-        font-size: 1.35rem;
-        line-height: 1.55;
-      }
-
-      .aside-stack {
-        display: grid;
-        gap: 1rem;
-        position: sticky;
-        top: 1rem;
-      }
-
-      .game-card {
-        background:
-          linear-gradient(180deg, rgba(32, 17, 21, 0.96), rgba(10, 7, 8, 0.96)),
-          radial-gradient(
-            circle at 100% 0%,
-            rgba(125, 79, 214, 0.18),
-            transparent 14rem
-          );
-        border: 1px solid var(--line);
-        box-shadow:
-          inset 0 0 0 1px rgba(255, 255, 255, 0.025),
-          0 18px 48px rgba(0, 0, 0, 0.35);
-        padding: 1rem;
-      }
-
-      .game-card.void {
-        border-color: var(--shadow-line);
-        box-shadow: 0 0 34px rgba(125, 79, 214, 0.12);
-      }
-
-      .game-label {
-        color: var(--ember);
-        font:
-          800 0.7rem/1.4 Arial,
-          sans-serif;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        margin-bottom: 0.45rem;
-      }
-
-      .game-card h3 {
-        margin: 0 0 0.55rem;
-        color: #f4e8d8;
-        font-size: 1.2rem;
-        line-height: 1.2;
-      }
-
-      .game-card p,
-      .game-card li {
-        color: var(--muted);
-        font-size: 0.94rem;
-        line-height: 1.55;
-      }
-
-      .game-card ul {
-        margin: 0.65rem 0 0;
-        padding-left: 1.1rem;
-      }
-
-      .flavor {
-        color: #d4c0b4 !important;
-        font-style: italic;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-        padding-top: 0.75rem;
-        margin-top: 0.8rem;
-      }
-
-      .dm-choice {
-        border: 1px solid rgba(125, 79, 214, 0.42);
-        background:
-          radial-gradient(
-            circle at 100% 0%,
-            rgba(125, 79, 214, 0.15),
-            transparent 12rem
-          ),
-          rgba(20, 11, 25, 0.78);
-        padding: 1rem;
-        font-family: Georgia, "Times New Roman", serif;
-        box-shadow: inset 0 0 18px rgba(125, 79, 214, 0.08);
-      }
-
-      .dm-choice strong {
-        color: #d8c4ff;
-        display: block;
-        margin-bottom: 0.6rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        font:
-          800 0.72rem/1.4 Arial,
-          sans-serif;
-      }
-
-      .dm-choice p {
-        margin: 0 0 0.7rem;
-        color: var(--muted);
-        font-size: 0.96rem;
-        line-height: 1.6;
-      }
-
-      .dm-choice .spoken-choice {
-        color: #f0e4cf;
-        font-style: italic;
-        border-left: 2px solid rgba(208, 138, 55, 0.42);
-        padding-left: 0.75rem;
-      }
-
-      .choice {
-        display: inline-block;
-        margin-top: 0.75rem;
-        color: #fff0d6;
-        background: rgba(143, 31, 31, 0.45);
-        border: 1px solid rgba(208, 138, 55, 0.38);
-        padding: 0.42rem 0.7rem;
-        font:
-          700 0.78rem/1 Arial,
-          sans-serif;
-        letter-spacing: 0.09em;
-        text-transform: uppercase;
-      }
-
-      .divider {
-        width: 100%;
-        height: 1px;
-        margin: 4rem 0;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          var(--line),
-          transparent
-        );
-      }
-
-      .ending-card {
-        margin-top: 2rem;
-        padding: 2rem;
-        border: 1px solid rgba(208, 138, 55, 0.34);
-        background:
-          radial-gradient(
-            circle at 50% 0%,
-            rgba(143, 31, 31, 0.24),
-            transparent 22rem
-          ),
-          rgba(9, 6, 7, 0.92);
-        text-align: center;
-      }
-
-      .ending-card h2 {
-        font-size: clamp(2.2rem, 6vw, 5rem);
-      }
-
-      .ending-card p {
-        max-width: 780px;
-        margin: 1rem auto 0;
-        color: var(--muted);
-        font-size: 1.1rem;
-      }
-
-      @media (max-width: 900px) {
-        .meta-strip {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .story-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .aside-stack {
-          position: static;
-        }
-      }
-
-      @media (max-width: 560px) {
-        .hero {
-          min-height: 74vh;
-        }
-
-        .meta-strip {
-          grid-template-columns: 1fr;
-        }
-
-        .story {
-          font-size: 1.04rem;
-        }
-      }
-    </style>
+    <title>Aura of Attrition | Shadowbound Character Origin</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="hero" id="top">
-      <div class="hero-inner">
-        <div class="kicker">Shadowbound Priest Origin</div>
-        <h1>Aura of Attrition</h1>
-        <p class="subtitle">
-          He began by standing close to the suffering. He ended as the reason no
-          one could stand close to him.
-        </p>
-        <div class="hero-actions">
-          <a class="button" href="#story">Begin the Descent</a>
-          <a class="button secondary" href="#legend">View Character Legend</a>
-        </div>
-      </div>
-    </header>
+    <div class="page-shell" id="top">
+      <header class="site-header">
+        <a
+          class="site-brand"
+          href="index.html"
+          aria-label="Aura of Attrition home"
+        >
+          <span class="site-brand__eyebrow">Shadowbound Character Origin</span>
+          <span class="site-brand__title">Aura of Attrition</span>
+        </a>
 
-    <main class="page" id="story">
-      <section class="meta-strip" aria-label="Character overview">
-        <div class="meta-card">
-          <strong>Class Fantasy</strong>
-          <span>Shadowbound Priest</span>
-        </div>
-        <div class="meta-card">
-          <strong>Core Conflict</strong>
-          <span>Salvation through corruption</span>
-        </div>
-        <div class="meta-card">
-          <strong>Primary Mechanic</strong>
-          <span>Power increases as proximity becomes lethal</span>
-        </div>
-        <div class="meta-card">
-          <strong>Alignment</strong>
-          <span>Unbound from Light and Shadow</span>
-        </div>
-      </section>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="index.html" aria-current="page">Intro</a>
+          <a href="chapter-2.html">Chapter II</a>
+          <a href="chapter-3.html">Chapter III</a>
+          <a href="codex.html">Codex</a>
+          <a href="details.html">Details</a>
+        </nav>
+      </header>
 
-      <section class="chapter">
-        <div class="chapter-header">
-          <div class="chapter-number">Chapter I</div>
-          <h2>The Bell That Would Not Ring</h2>
-        </div>
-        <div class="story-grid">
-          <article class="story">
-            <p>
-              Before the Veil, Father Ilyas believed holiness was measured by
-              distance. The righteous did not stand above the suffering. They
-              stood beside it. They entered fever rooms, plague alleys,
-              battlefields, and funeral houses. They put their hands where
-              others would not look, and they trusted the Light to pass through
-              them without judgment.
-            </p>
+      <main>
+        <section class="hero" aria-labelledby="page-title">
+          <div class="hero__kicker">Character Design Narrative</div>
+          <h1 id="page-title">Aura of Attrition</h1>
+          <p class="hero__subtitle">
+            He began by standing close to the suffering. He ended as the reason
+            no one could stand close to him.
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#chapter-1"
+              >Begin Chapter I</a
+            >
+            <a class="button" href="chapter-2.html">Continue to Chapter II</a>
+            <a class="button" href="codex.html">Open Codex</a>
+          </div>
+        </section>
 
-            <p>
-              The Cathedral of Dawn had been built around that belief. Its nave
-              was wide enough for the sick to sleep between the pews. Its doors
-              were never barred, even in winter. Its bells rang every morning
-              before sunrise, not to summon the faithful, but to remind the
-              starving that someone still knew they were alive.
-            </p>
+        <section class="section" aria-labelledby="overview-title">
+          <div class="section-kicker">Concept Overview</div>
+          <h2 id="overview-title">A support fantasy turned predatory</h2>
+          <p class="section-intro">
+            Ilyas is a Shadowbound character concept built around proximity,
+            attrition, sustain, and moral triage. Light offers control. Shadow
+            offers speed. The closer others stand to him, the more dangerous his
+            power becomes.
+          </p>
 
-            <p>
-              On the morning the bells failed, Ilyas was hearing confession from
-              a woman named Selka, whose son had been bitten by something that
-              came out of the river fog. She had not come to ask forgiveness.
-              She had come to ask whether mercy could still be given to a child
-              who no longer recognized his own mother.
-            </p>
-
-            <p>
-              Ilyas had begun to answer when the first scream tore through the
-              cathedral.
-            </p>
-
-            <p>
-              It did not sound like fear. Fear was human. This was the sound of
-              a throat being used by something that had never needed one before.
-            </p>
-
-            <p>
-              He ran into the nave and found the congregation folding in on
-              itself. Parishioners clawed at their own skin as black veins
-              surfaced beneath their faces. A mason named Jorren slammed his
-              head against a pillar until the stone cracked. Two choirboys tried
-              to hold down Sister Ameline while her spine arched so violently
-              that her heels touched the back of her skull.
-            </p>
-
-            <p>At the center of it all stood Selka’s son.</p>
-
-            <p>
-              The boy was seven. Ilyas remembered the baptism. He remembered the
-              child laughing because the water had been cold. Now the boy’s jaw
-              hung open too far, and something black and wet moved behind his
-              teeth.
-            </p>
-
-            <p>“Father,” the boy said, though three voices spoke with him.</p>
-
-            <p>Ilyas lifted his hand and called the Light.</p>
-
-            <p>
-              It came, as it always had. Gold fire burst from his palm and
-              struck the child in the chest. For one terrible instant, the boy
-              looked human again. His eyes cleared. His mouth shaped a word that
-              may have been <em>mother</em>.
-            </p>
-
-            <p>Then he became ash.</p>
-
-            <p>
-              The nave erupted. Some parishioners fled toward the doors. Others
-              fell to their knees and prayed. The corrupted among them moved
-              faster than dying bodies should have moved, hurling themselves at
-              the living with the boneless desperation of drowning men.
-            </p>
-
-            <p>
-              Ilyas fought from the aisle to the altar, one burst of Light at a
-              time. He severed corruption from flesh when he could. When he
-              could not, he burned both together. The cathedral filled with heat
-              and screaming. Wax ran down the candles in thick streams. Blood
-              steamed on the marble.
-            </p>
-
-            <p>
-              Selka crawled through the chaos, clutching the ash that had been
-              her son. A Husked Devout saw her move and turned.
-            </p>
-
-            <p>
-              Ilyas had enough strength to save her or to hold the eastern doors
-              where twenty civilians were trapped behind fallen pews.
-            </p>
-
-            <p>He chose the doors.</p>
-
-            <p>
-              By the time the bells finally rang, they were not being pulled by
-              hands. They swung in the wind from the broken tower, tolling over
-              a courtyard filled with the dead.
-            </p>
-
-            <p>
-              That evening, the survivors called him blessed. They kissed his
-              sleeves. They thanked him for saving the cathedral.
-            </p>
-
-            <p>
-              Ilyas looked at the blackened shape of Selka near the altar steps
-              and understood something that would never leave him.
-            </p>
-
-            <p>The Light was merciful.</p>
-
-            <p>It was not enough.</p>
-          </article>
-
-          <aside class="aside-stack" aria-label="Gameplay notes for Chapter I">
-            <div class="game-card">
-              <div class="game-label">Opening Encounter</div>
-              <h3>Ashen Cathedral</h3>
-              <p><strong>Enemy Type:</strong> Husked Devout</p>
-              <ul>
-                <li>
-                  Corrupted civilians force the player to choose between
-                  cleansing, containment, and mercy kills.
-                </li>
-                <li>
-                  Rescue objectives are mutually exclusive, introducing moral
-                  triage early.
-                </li>
-                <li>
-                  NPC deaths create later reputation and dialogue consequences.
-                </li>
-              </ul>
-            </div>
-            <div class="game-card">
-              <div class="game-label">Ability</div>
-              <h3>Radiant Severance</h3>
+          <div class="card-grid">
+            <div class="card">
+              <div class="game-label">Character Fantasy</div>
+              <h3>The Shadowbound</h3>
               <p>
-                Channel Light in a focused arc. Corrupted targets are purified
-                or destroyed based on corruption severity.
-              </p>
-              <ul>
-                <li>High damage to undead and void-touched enemies.</li>
-                <li>Minor healing pulse to nearby allies.</li>
-                <li>Repeated use applies Exhaustion.</li>
-              </ul>
-              <p class="flavor">
-                “Mercy is clean only when seen from far away.”
+                A corrupted holy figure who learns to preserve life by ending
+                threats faster, even when that efficiency begins to harm the
+                people he meant to protect.
               </p>
             </div>
-          </aside>
-        </div>
-      </section>
 
-      <section class="chapter">
-        <div class="chapter-header">
-          <div class="chapter-number">Chapter II</div>
-          <h2>The Veil Beneath the Altar</h2>
-        </div>
-        <div class="story-grid">
-          <article class="story">
-            <p>
-              The dead were still being counted when Ilyas descended beneath the
-              cathedral.
-            </p>
-
-            <p>
-              No one ordered him to go. No one knew the lower crypt existed
-              except the senior clergy, and most of them had died in the first
-              hour of the attack. The entrance had been hidden beneath the
-              reliquary of Saint Orven, a martyr famous for sealing a wound in
-              the world by singing until his lungs filled with blood.
-            </p>
-
-            <p>
-              Ilyas moved the reliquary himself. The saint’s bones rattled
-              inside their silver case as the stone slab beneath scraped open.
-            </p>
-
-            <p>
-              The stairs below did not smell of dust. They smelled of rain on
-              old iron.
-            </p>
-
-            <p>
-              He carried no torch. The Light gathered around his fingers, but it
-              seemed thinner there, less certain. It touched the walls and drew
-              back. Old warnings had been carved into the stone in several dead
-              languages. Ilyas knew only one of them.
-            </p>
-
-            <p><em>Do not mistake answer for grace.</em></p>
-
-            <p>
-              At the bottom of the stairwell, the crypt opened into a circular
-              chamber. The floor had split down the center, not cracked by age
-              or pressure, but parted like lips. Black vapor rose from the
-              fracture in slow ribbons. It curled toward Ilyas as he approached.
-            </p>
-
-            <p>
-              The scriptures called the Veil an absence. Darkness without
-              purpose. Hunger without shape.
-            </p>
-
-            <p>That was the first lie he recognized.</p>
-
-            <p>The Veil was not empty. It was listening.</p>
-
-            <p>
-              Ilyas stood over the fracture and felt a presence consider him.
-              Not a demon. Not a god. Something quieter and older than worship.
-              It did not promise power. It did not seduce him with visions. It
-              simply showed him the cathedral as it had been that morning, then
-              showed it again with every Husk dead before it touched a civilian.
-            </p>
-
-            <p>He saw Selka alive.</p>
-
-            <p>He saw the child die faster.</p>
-
-            <p>
-              He saw himself standing in the center of it all, untouched and
-              terrible.
-            </p>
-
-            <p>“No,” he whispered.</p>
-
-            <p>The Veil did not answer.</p>
-
-            <p>
-              It did not need to. Ilyas had already begun bargaining with the
-              vision. Not because he wanted darkness. Not because he hated the
-              Light. Because he had seen the shape of a better outcome, and it
-              had cost him nothing yet.
-            </p>
-
-            <p>He knelt and placed his hand inside the fracture.</p>
-
-            <p>
-              Cold entered him without violence. It moved through his skin, his
-              blood, his breath. It filled every hollow place grief had opened.
-              For a moment, he thought he heard every candle in the cathedral
-              above extinguish at once.
-            </p>
-
-            <p>
-              Then the cold settled around his heart like a second set of ribs.
-            </p>
-          </article>
-
-          <aside class="aside-stack" aria-label="Gameplay notes for Chapter II">
-            <div class="dm-choice">
-              <strong>Dungeon Master Choice</strong>
+            <div class="card">
+              <div class="game-label">Combat Identity</div>
+              <h3>Attrition Caster</h3>
               <p>
-                The chamber grows still. The Light does not abandon you, but it
-                stops speaking first.
+                Weakens enemies, drains corruption, converts pressure into
+                sustain, and grows stronger when surrounded by collapsing life.
               </p>
-              <p class="spoken-choice">
-                If Ilyas places his hand upon the fracture, he may draw from
-                what waits beneath the altar. The power will answer. It will not
-                leave cleanly.
-              </p>
-              <span class="choice">Place your hand upon the Veil</span>
             </div>
-            <div class="game-card void">
-              <div class="game-label">Lore Object</div>
-              <h3>The Veil Fracture</h3>
+
+            <div class="card">
+              <div class="game-label">Core Tradeoff</div>
+              <h3>Control or Surrender</h3>
               <p>
-                A sealed wound beneath the Cathedral of Dawn. It does not tempt
-                through lies. It offers outcomes without discussing cost.
-              </p>
-              <p class="flavor">
-                “Every forbidden door was built by someone who once believed it
-                should remain closed.”
+                Light protects through slower, safer tools. Shadow ends fights
+                quickly, but the Veil does not distinguish between enemy,
+                companion, or bystander.
               </p>
             </div>
-          </aside>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      <section class="chapter">
-        <div class="chapter-header">
-          <div class="chapter-number">Chapter III</div>
-          <h2>The First Borrowing</h2>
-        </div>
-        <div class="story-grid">
-          <article class="story">
-            <p>
-              The second incursion came three nights later, when the city had
-              not yet finished digging graves for the first.
-            </p>
+        <section class="section" id="chapter-1" aria-labelledby="chapter-title">
+          <div class="chapter-layout">
+            <article class="chapter-body">
+              <div class="section-kicker">Chapter I</div>
+              <h2 class="chapter-title" id="chapter-title">
+                The Bell That Would Not Ring
+              </h2>
 
-            <p>
-              This time the attack began in the plague district, where families
-              slept six to a room and the alleys were too narrow for carts.
-              Ilyas arrived with six wardens, two healers, and a crowd of
-              desperate volunteers carrying farm tools and kitchen knives. They
-              looked to him because he wore white vestments and because
-              survivors had already begun to exaggerate what he had done at the
-              cathedral.
-            </p>
-
-            <p>He told them to stay behind him.</p>
-
-            <p>
-              The first Husk came through a doorway on all fours. It had once
-              been a butcher. Ilyas recognized the apron before he recognized
-              the face. Its arms had lengthened, fingers dragging against the
-              stones, nails split and sharpened into hooks.
-            </p>
-
-            <p>Ilyas raised his right hand to call the Light.</p>
-
-            <p>His left moved first.</p>
-
-            <p>
-              Shadow slid out of him in a thin, soundless thread. It reached the
-              butcher before the creature could spring. The Husk froze. Its
-              mouth opened. Black vapor poured from its eyes, nose, and throat,
-              pulled into Ilyas like smoke into a chimney.
-            </p>
-
-            <p>The body collapsed without flame.</p>
-
-            <p>No ash. No explosion. No wasted motion.</p>
-
-            <p>The volunteers stared.</p>
-
-            <p>Ilyas stared with them.</p>
-
-            <p>
-              He felt no exhaustion. Quite the opposite. The corruption entered
-              him and became strength. The ache in his shoulder from moving
-              Saint Orven’s reliquary vanished. The cut across his palm sealed.
-              His breathing steadied.
-            </p>
-
-            <p>
-              Another Husk came. Then three. Then a dozen from the alley mouth.
-            </p>
-
-            <p>Ilyas pulled again.</p>
-
-            <p>
-              This time the shadow spread wider. It caught the front line of
-              creatures and unraveled them where they stood. Their bodies sank
-              inward, ribs collapsing, faces drying into leather. The wardens
-              cheered. One of the healers began to laugh in disbelief.
-            </p>
-
-            <p>Then a volunteer behind Ilyas dropped to one knee.</p>
-
-            <p>
-              His name was Bren. He was seventeen, maybe eighteen, with a rusted
-              spear and a strip of red cloth tied around his wrist. Ilyas had
-              seen him earlier helping an old man across the square.
-            </p>
-
-            <p>Bren coughed, wiping blood from his nose.</p>
-
-            <p>“I’m fine,” the boy said before anyone asked.</p>
-
-            <p>
-              Ilyas felt the truth before he understood it. The shadow had not
-              only drawn from the Husks. It had brushed everything living
-              nearby. A sliver from each. A breath. A pulse. A little warmth
-              taken without permission.
-            </p>
-
-            <p>More Husks appeared at the alley mouth.</p>
-
-            <p>Bren was still coughing.</p>
-
-            <p>
-              Ilyas could stop. He could fall back and force the wardens to hold
-              the line while he returned to the slower mercy of Light.
-            </p>
-
-            <p>Instead, he reached deeper.</p>
-
-            <p>The alley died.</p>
-
-            <p>
-              When the last Husk fell, Bren was lying on his side, eyes open,
-              red cloth dark around his wrist. The healers said his heart had
-              failed from fear. The wardens repeated it because it was easier.
-            </p>
-
-            <p>Ilyas said nothing.</p>
-
-            <p>
-              That night, the district survived. Mothers pressed their children
-              to their chests and wept his name like a prayer. Men who had
-              doubted him bowed when he passed.
-            </p>
-
-            <p>
-              Ilyas returned to the cathedral and washed Bren’s blood from the
-              hem of his vestments.
-            </p>
-
-            <p>It took longer than expected.</p>
-          </article>
-
-          <aside
-            class="aside-stack"
-            aria-label="Gameplay notes for Chapter III"
-          >
-            <div class="game-card void">
-              <div class="game-label">Ability Acquired</div>
-              <h3>Grasp of the Veil</h3>
               <p>
-                Drain life and corruption from enemies. Restores significant
-                health and removes personal afflictions.
+                Before the Veil, Father Ilyas believed holiness was measured by
+                distance. The righteous did not stand above the suffering. They
+                stood beside it. They entered fever rooms, plague alleys,
+                battlefields, and funeral houses. They put their hands where
+                others would not look, and they trusted the Light to pass
+                through them without judgment.
               </p>
-              <ul>
-                <li>Primary targets suffer rapid decay.</li>
-                <li>Nearby living creatures lose minor vitality.</li>
-                <li>Repeated use increases hidden Aura instability.</li>
-              </ul>
-              <p class="flavor">
-                “He found a way to heal faster. The world learned to bleed
-                quietly.”
-              </p>
-            </div>
-            <div class="game-card">
-              <div class="game-label">Narrative Consequence</div>
-              <h3>Witnessed Miracle</h3>
+
               <p>
-                Public reputation improves after the district survives. Private
-                suspicion begins among healers, wardens, and anyone standing
-                close enough to feel the cost.
+                The Cathedral of Dawn had been built around that belief. Its
+                nave was wide enough for the sick to sleep between the pews. Its
+                doors were never barred, even in winter. Its bells rang every
+                morning before sunrise, not to summon the faithful, but to
+                remind the starving that someone still knew they were alive.
               </p>
-            </div>
-          </aside>
-        </div>
-      </section>
 
-      <section class="chapter">
-        <div class="chapter-header">
-          <div class="chapter-number">Chapter IV</div>
-          <h2>The Party That Faded</h2>
-        </div>
-        <div class="story-grid">
-          <article class="story">
-            <p>
-              The Church refused to abandon Ilyas because abandoning him would
-              have required admitting they had lost control of their own
-              miracle.
-            </p>
-
-            <p>Instead, they assigned him companions.</p>
-
-            <p>
-              Sir Albrecht was first among them, a broad man with a sunburst
-              shield and a habit of speaking only when silence became
-              impractical. Mira was a novice hymnkeeper whose voice could steady
-              frightened soldiers and soothe fevered children. Tovan was a
-              mercenary who claimed he had fought in nine wars, though he was
-              young enough that at least three of them had to be lies.
-            </p>
-
-            <p>
-              They met Ilyas at the sealed gate beneath the ruined east
-              transept.
-            </p>
-
-            <p>“We are not here to watch you,” Albrecht said.</p>
-
-            <p>
-              “Of course not,” Tovan added, tightening the strap on his sword
-              belt. “We are here to make sure the priest does not heroically die
-              before anyone important can take credit.”
-            </p>
-
-            <p>Mira gave him a sharp look. “That is not why we are here.”</p>
-
-            <p>“It is partly why we are here.”</p>
-
-            <p>Ilyas almost smiled. Almost.</p>
-
-            <p>
-              Their objective was simple in the way doomed things were often
-              simple. Something beneath the basilica was gathering the bodies of
-              the dead and making a choir out of them. Survivors reported
-              hearing hymns from below, sung backward through broken throats.
-              Every hour the sound grew louder. Every hour more corpses
-              disappeared from the grave trenches.
-            </p>
-
-            <p>They entered the catacombs at dusk.</p>
-
-            <p>
-              The first passage was ordinary enough: old stone, low ceilings,
-              alcoves filled with bones. Then the walls began to change. Mortar
-              softened into dark tissue. Roots as thin as veins threaded through
-              the cracks. When Mira brushed one by accident, it recoiled.
-            </p>
-
-            <p>“Something is breathing,” Tovan said.</p>
-
-            <p>“Everything here is dead,” Albrecht replied.</p>
-
-            <p>
-              Tovan drew his sword. “That has not been as reassuring as you
-              think.”
-            </p>
-
-            <p>
-              The first corpse did not rise dramatically. It shifted. A shoulder
-              rolled. A jaw clicked. Its spine bent too far backward, then
-              snapped upright with a wet correction.
-            </p>
-
-            <p>
-              Tovan moved before anyone could stop him. He drove his blade
-              through the corpse’s chest and pinned it to the wall.
-            </p>
-
-            <p>The corpse looked down at the sword, then at him.</p>
-
-            <p>Its ribs opened.</p>
-
-            <p>
-              The bones spread like fingers and closed around Tovan’s forearm.
-              He screamed, not from pain at first, but from the insult of being
-              held by something that should not have been strong enough to hold
-              him.
-            </p>
-
-            <p>
-              Albrecht slammed his shield into the corpse, crushing it against
-              the wall. Ilyas struck with Light at the same moment, and the
-              thing burst apart in a rain of ash and black fluid.
-            </p>
-
-            <p>
-              Tovan staggered back, clutching his arm. Bone-white scratches
-              marked his skin in a perfect ring.
-            </p>
-
-            <p>“Still attached,” he said, trying to grin. “Good sign.”</p>
-
-            <p>No one answered.</p>
-
-            <p>
-              They pushed deeper. At every junction, the backward hymn grew
-              clearer. It had melody but no breath, rhythm but no life. Mira
-              began singing under her breath to counter it. Her hymn put warmth
-              into the air, and for a while the walls stopped pulsing when she
-              passed.
-            </p>
-
-            <p>Then the catacombs opened.</p>
-
-            <p>
-              They found a chamber the size of the cathedral nave, though no
-              such space should have existed beneath the city. Coffins hung from
-              the ceiling by cords of black sinew. Bodies had been arranged
-              along the walls in ascending rows, their mouths sewn open with
-              wire. At the center of the chamber stood Malgeroth, Choir of Rot.
-            </p>
-
-            <p>
-              It had no single body. It wore many. Torso upon torso fused around
-              a central column of bone, faces turning in different directions,
-              all singing the same reversed prayer. Its arms were made of arms.
-              Its crown was a ring of infant skulls polished clean.
-            </p>
-
-            <p>Mira stopped singing.</p>
-
-            <p>Malgeroth sang louder.</p>
-
-            <p>The corpses on the walls opened their eyes.</p>
-
-            <p>
-              Albrecht moved first. He planted his shield and shouted for the
-              others to form behind him. Tovan took the left flank, bleeding arm
-              held close but sword ready. Mira recovered enough to begin a hymn
-              of binding, her voice fragile at first, then stronger as Light
-              gathered around her like dawn through fog.
-            </p>
-
-            <p>
-              Ilyas stood at the rear and cast Radiant Severance into the first
-              wave.
-            </p>
-
-            <p>It worked. For a time, it worked beautifully.</p>
-
-            <p>
-              Light carved through the undead as Albrecht broke their charge.
-              Tovan hacked the legs from anything that slipped around the
-              shield. Mira’s hymn slowed the Rot spreading across the floor,
-              forcing it back in golden ripples. They were four bodies moving
-              toward one purpose. For the first time since the cathedral fell,
-              Ilyas remembered what faith had felt like before it became
-              arithmetic.
-            </p>
-
-            <p>Then Malgeroth changed the song.</p>
-
-            <p>
-              The hymn became a wet grinding sound. The Rot surged across the
-              chamber and climbed Albrecht’s shield. It crawled over Tovan’s
-              boots. It entered Mira’s voice and bent one note sour.
-            </p>
-
-            <p>Albrecht grunted as black lines spread up his wrist.</p>
-
-            <p>“Cleanse!” he shouted.</p>
-
-            <p>
-              Ilyas turned the Light on him. Gold flame burned the corruption
-              away, but the effort cost time. In that time, three corpses
-              reached Mira. Tovan intercepted two. The third struck her across
-              the face and sent her to the ground.
-            </p>
-
-            <p>Ilyas burned the third. Albrecht nearly fell while he did.</p>
-
-            <p>
-              The chamber forced a rhythm on them. Cleanse Albrecht, save Mira.
-              Save Mira, lose ground. Burn the dead, let the Rot spread. Stop
-              the Rot, let Malgeroth sing.
-            </p>
-
-            <p>They were not losing because they lacked courage.</p>
-
-            <p>They were losing because courage had become inefficient.</p>
-
-            <p>
-              Ilyas felt the Veil behind his ribs. Not urging. Not whispering.
-              Waiting.
-            </p>
-
-            <p>
-              Mira looked back at him from the floor, blood running from her
-              nose. “Father, please.”
-            </p>
-
-            <p>He thought she was asking for help.</p>
-
-            <p>
-              Later, he would wonder if she had already understood and was
-              asking him not to.
-            </p>
-
-            <p>Ilyas lowered his right hand.</p>
-
-            <p>Albrecht saw it. “No.”</p>
-
-            <p>Shadow spread from Ilyas’s feet in a perfect circle.</p>
-
-            <p>
-              It did not explode. It claimed. The gold light in the room dimmed
-              and inverted. Mira’s hymn twisted into a note too low for human
-              lungs. The undead froze as if listening to a command from beneath
-              the world.
-            </p>
-
-            <p>Then they collapsed.</p>
-
-            <p>
-              Malgeroth’s many mouths screamed as the Cathedral of Dusk took
-              shape. The bodies fused into its mass shriveled one by one, souls
-              or shadows or whatever remained of them pulled loose in black
-              strands. The Rot recoiled from the floor. Coffins fell from the
-              ceiling and burst open. The chamber became a storm of dust, bone,
-              and devoured song.
-            </p>
-
-            <p>For three heartbeats, Ilyas believed he had saved them.</p>
-
-            <p>Then Tovan coughed blood across his own hands.</p>
-
-            <p>Mira’s hymn stopped.</p>
-
-            <p>
-              Albrecht turned from the dying boss and forced his way toward
-              Ilyas. Every step looked impossible. His armor blackened. The
-              sunburst on his shield cracked down the center.
-            </p>
-
-            <p>“End it,” Albrecht said.</p>
-
-            <p>Ilyas tried.</p>
-
-            <p>
-              He reached for the edge of the spell and found none. Cathedral of
-              Dusk was not a cast. It was a condition. Once invited, the Veil
-              did not distinguish between enemy, ally, martyr, or friend. It
-              recognized only nearness.
-            </p>
-
-            <p>
-              Tovan fell first. He dropped to one knee, tried to make a joke,
-              and died before finding one.
-            </p>
-
-            <p>
-              Mira crawled toward Ilyas. Her eyes were wide, not accusing, only
-              terrified by the betrayal of her own body. Frost whitened her
-              lips.
-            </p>
-
-            <p>“Father,” she whispered, “why am I cold?”</p>
-
-            <p>
-              Albrecht reached her and tried to lift her away from the circle.
-              His gauntlets passed under her arms. For one moment, it seemed he
-              might succeed.
-            </p>
-
-            <p>Then his armor hit the ground empty.</p>
-
-            <p>
-              The spell ended when there was nothing left close enough to feed
-              it.
-            </p>
-
-            <p>
-              Malgeroth was gone. The Rot was gone. The catacombs were silent.
-            </p>
-
-            <p>
-              Ilyas stood untouched at the center of the chamber, surrounded by
-              victory.
-            </p>
-          </article>
-
-          <aside class="aside-stack" aria-label="Gameplay notes for Chapter IV">
-            <div class="game-card">
-              <div class="game-label">Dungeon</div>
-              <h3>Spires Below the Basilica</h3>
-              <p><strong>Boss:</strong> Malgeroth, Choir of Rot</p>
-              <ul>
-                <li>
-                  Rot spreads across the arena and applies stacking decay.
-                </li>
-                <li>
-                  Players must choose between cleansing allies, damaging the
-                  boss, and interrupting the choir.
-                </li>
-                <li>
-                  Shadow abilities can shortcut mechanics but punish allied
-                  positioning.
-                </li>
-              </ul>
-            </div>
-            <div class="game-card void">
-              <div class="game-label">Ultimate</div>
-              <h3>Cathedral of Dusk</h3>
               <p>
-                Create a zone of inverted sanctity. Enemies rapidly decay.
-                Allies inside suffer escalating degeneration.
+                On the morning the bells failed, Ilyas was hearing confession
+                from a woman named Selka, whose son had been bitten by something
+                that came out of the river fog. She had not come to ask
+                forgiveness. She had come to ask whether mercy could still be
+                given to a child who no longer recognized his own mother.
               </p>
-              <ul>
-                <li>Radius expands while enemies are dying inside it.</li>
-                <li>Cannot be canceled once fully manifested.</li>
-                <li>Unlocks Aura of Attrition after companion casualties.</li>
-              </ul>
-              <p class="flavor">
-                “The prayer was answered. The congregation was not spared.”
-              </p>
-            </div>
-          </aside>
-        </div>
-      </section>
 
-      <section class="chapter">
-        <div class="chapter-header">
-          <div class="chapter-number">Chapter V</div>
-          <h2>The Social Cost</h2>
-        </div>
-        <div class="story-grid">
-          <article class="story">
-            <p>
-              The official record said Sir Albrecht, Mira of the Dawn Choir, and
-              Tovan Vale died sealing the Spires Below the Basilica.
-            </p>
-
-            <p>It did not mention Ilyas.</p>
-
-            <p>
-              The Church understood the value of omission. It let them keep
-              their miracle while burying the evidence of its cost. High
-              Inquisitor Vareen told Ilyas the dead would be honored. Their
-              names would be sung at morning rites. Their families would be
-              paid.
-            </p>
-
-            <p>“And me?” Ilyas asked.</p>
-
-            <p>
-              Vareen looked at him for a long moment. She was old enough to have
-              mistaken many things for necessity and wise enough to know when
-              she was doing it again.
-            </p>
-
-            <p>“You will continue your work,” she said.</p>
-
-            <p>So he did.</p>
-
-            <p>
-              At first, he tried to manage the danger. He kept distance during
-              briefings. He stood near open windows. He refused squires,
-              attendants, and escorts. When people insisted on touching his
-              sleeve, he stepped away before their fingers could find cloth.
-            </p>
-
-            <p>The precautions helped until they did not.</p>
-
-            <p>
-              In the town of Merrowick, an innkeeper offered him a private room
-              and hot stew. Ilyas accepted because it had been raining for six
-              days and he had not slept under a roof since leaving Karthain. The
-              innkeeper’s daughter brought him bread. She was perhaps twelve,
-              with flour on her cheek and the careful seriousness of a child
-              trusted with adult work.
-            </p>
-
-            <p>She returned the next morning unable to stand.</p>
-
-            <p>
-              The healer blamed winter fever. Ilyas left before the fever could
-              spread to the explanation.
-            </p>
-
-            <p>
-              On the north road, a pilgrim named Odran shared his fire without
-              asking questions. He recognized Ilyas and pretended not to. That
-              kindness made the silence between them bearable. They ate salted
-              fish while wolves howled somewhere beyond the trees.
-            </p>
-
-            <p>
-              By dawn, Odran’s beard was rimed with frost. He was alive, but
-              barely. Ilyas placed three silver coins beside him and walked
-              until the sun rose high enough to make shadows short.
-            </p>
-
-            <p>
-              After that, he slept in ruins, caves, burned chapels, and once
-              inside the ribcage of something large enough that he chose not to
-              identify it.
-            </p>
-
-            <p>
-              His loneliness changed shape over time. At first it was
-              punishment. Then discipline. Then habit.
-            </p>
-
-            <p>Eventually, it became preference.</p>
-
-            <p>
-              Alone, he did not have to soften his casting. Alone, he did not
-              have to count breaths that were not his. Alone, he could enter a
-              demon nest and erase it without worrying who might be standing too
-              close when the Veil opened its mouth.
-            </p>
-
-            <p>He told himself this was mercy.</p>
-
-            <p>And perhaps it was.</p>
-
-            <p>
-              But there was relief in it too, and relief was harder to forgive
-              than guilt.
-            </p>
-          </article>
-
-          <aside class="aside-stack" aria-label="Gameplay notes for Chapter V">
-            <div class="game-card void">
-              <div class="game-label">Passive Evolution</div>
-              <h3>Aura of Attrition</h3>
               <p>
-                Your presence drains minor vitality from nearby living
-                creatures. Effect intensifies during Shadow abilities and long
-                rests.
+                Ilyas had begun to answer when the first scream tore through the
+                cathedral.
               </p>
-              <ul>
-                <li>
-                  Allies suffer reduced maximum health after prolonged
-                  proximity.
-                </li>
-                <li>
-                  Solo combat grants increased spell haste and Shadow damage.
-                </li>
-                <li>Companion recruitment options become restricted.</li>
-              </ul>
-              <p class="flavor">“Salvation has a radius.”</p>
-            </div>
-            <div class="game-card">
-              <div class="game-label">Reputation State</div>
-              <h3>The Untouched Saint</h3>
+
               <p>
-                Commoners tell contradictory stories. Some say Ilyas cures
-                entire villages. Others say flowers blacken where he kneels.
+                It did not sound like fear. Fear was human. This was the sound
+                of a throat being used by something that had never needed one
+                before.
               </p>
-            </div>
-          </aside>
-        </div>
-      </section>
 
-      <section class="chapter">
-        <div class="chapter-header">
-          <div class="chapter-number">Chapter VI</div>
-          <h2>The Rift Over Karthain</h2>
-        </div>
-        <div class="story-grid">
-          <article class="story">
-            <p>The sky opened above Karthain at noon.</p>
-
-            <p>
-              There was no thunder, no omen, no priestly dream the night before.
-              The sun simply tore down the middle, and behind it waited a
-              darkness with depth. People standing in the market square saw
-              stars where daylight had been. Then they saw something moving
-              between them.
-            </p>
-
-            <p>
-              The first wave of Voidborne fell like burning insects. They struck
-              rooftops, towers, streets, and gardens, unfolding from impact
-              craters into tall, jointed things with blades where faces should
-              have been. The city guard formed ranks. Bells rang. Civilians fled
-              toward the cathedral because fear remembers old habits even after
-              faith has been wounded.
-            </p>
-
-            <p>Ilyas watched from a hill beyond the western road.</p>
-
-            <p>
-              He had not come to Karthain. He had been avoiding it. The city was
-              too full, too loud, too alive. Yet there it was below him,
-              screaming beneath a wound in heaven.
-            </p>
-
-            <p>
-              High Inquisitor Vareen found him before sunset. Her horse
-              collapsed ten paces away, foam at its mouth, flanks trembling from
-              a ride that should have taken half a day.
-            </p>
-
-            <p>Vareen did not waste breath on accusation.</p>
-
-            <p>“Lead us,” she said.</p>
-
-            <p>
-              Behind her, on the road, stood soldiers, wardens, surviving
-              clergy, and volunteers too frightened to be brave but too decent
-              to run. They carried spears, lanterns, relics, and hope. Ilyas
-              could feel their lives like candle flames in a draft.
-            </p>
-
-            <p>Too many. Too close.</p>
-
-            <p>“No,” he said.</p>
-
-            <p>
-              Vareen’s expression did not change. “If the Rift widens, the
-              capital falls.”
-            </p>
-
-            <p>“If I stand among them, they die before reaching the gate.”</p>
-
-            <p>“Then control it.”</p>
-
-            <p>
-              Ilyas looked at the soldiers. Some recognized him. Some made
-              warding signs. One young woman smiled at him with such desperate
-              gratitude that he had to look away.
-            </p>
-
-            <p>
-              “That is what everyone asks before they learn what control means,”
-              he said.
-            </p>
-
-            <p>Vareen left him there.</p>
-
-            <p>The army marched without him.</p>
-
-            <p>
-              From the hill, Ilyas watched them enter the burning outskirts.
-              They fought well. Better than he expected. Vareen led from the
-              front, her silver mace breaking Voidborne limbs while priests
-              behind her raised barriers of Light. For one hour, perhaps two, it
-              seemed possible that courage and formation and old magic might be
-              enough.
-            </p>
-
-            <p>Then the thing behind the Rift noticed them.</p>
-
-            <p>The second wave did not fall. It emerged.</p>
-
-            <p>
-              Long arms reached through the tear and placed pieces of itself
-              into the city. Streets folded. Buildings twisted inward. Soldiers
-              who had been standing beside one another were suddenly separated
-              by impossible distances. Some aged into dust. Some became
-              children. Some turned their blades on empty air and begged it to
-              stop wearing their mother’s face.
-            </p>
-
-            <p>By nightfall, the army was broken.</p>
-
-            <p>
-              Vareen returned alone. Her mace was gone. One side of her face had
-              been burned smooth.
-            </p>
-
-            <p>“You were right,” she said.</p>
-
-            <p>Ilyas said nothing.</p>
-
-            <p>“You also let them die.”</p>
-
-            <p>
-              That deserved an answer. He searched for one and found only the
-              truth.
-            </p>
-
-            <p>“Yes.”</p>
-
-            <p>
-              Vareen laughed once. It was a small, ruined sound. “Then save what
-              is left, monster.”
-            </p>
-
-            <p>Ilyas walked down the hill alone.</p>
-          </article>
-
-          <aside class="aside-stack" aria-label="Gameplay notes for Chapter VI">
-            <div class="game-card">
-              <div class="game-label">World Event</div>
-              <h3>The Rift Over Karthain</h3>
-              <p><strong>Recommended Party:</strong> Full raid force</p>
-              <p><strong>Actual Party:</strong> Ilyas alone</p>
-              <ul>
-                <li>
-                  Friendly units suffer escalating Aura pressure near Ilyas.
-                </li>
-                <li>
-                  Refusing the army preserves civilians near him but causes
-                  off-screen losses.
-                </li>
-                <li>
-                  The player fantasy shifts from holy defender to necessary
-                  catastrophe.
-                </li>
-              </ul>
-              <p class="flavor">
-                “Some heroes stand alone because they are brave. Others stand
-                alone because the alternative is worse.”
-              </p>
-            </div>
-            <div class="game-card void">
-              <div class="game-label">Moral State</div>
-              <h3>Detachment</h3>
               <p>
-                Ilyas no longer evaluates choices by virtue. He evaluates
-                survivability, cost, and control.
+                He ran into the nave and found the congregation folding in on
+                itself. Parishioners clawed at their own skin as black veins
+                surfaced beneath their faces. A mason named Jorren slammed his
+                head against a pillar until the stone cracked. Two choirboys
+                tried to hold down Sister Ameline while her spine arched so
+                violently that her heels touched the back of her skull.
               </p>
-            </div>
-          </aside>
-        </div>
-      </section>
 
-      <section class="chapter">
-        <div class="chapter-header">
-          <div class="chapter-number">Chapter VII</div>
-          <h2>The Veiled Sovereign</h2>
-        </div>
-        <div class="story-grid">
-          <article class="story">
-            <p>
-              Karthain did not look like a city when Ilyas entered it. It looked
-              like a memory being revised by someone cruel.
-            </p>
+              <p>At the center of it all stood Selka’s son.</p>
 
-            <p>
-              A bridge crossed itself in the air. A fountain poured blood upward
-              into a blackened basin. Houses leaned together like whispering
-              conspirators. The dead lay in patterns too deliberate to be
-              accidental, arranged along the streets in spirals that pointed
-              toward the central square.
-            </p>
-
-            <p>
-              Voidborne hunted among the ruins. Ilyas did not hide from them. He
-              walked openly, staff in hand, vestments dark beneath old ash and
-              new rain.
-            </p>
-
-            <p>
-              The first pack charged from the shell of a bakery. There were
-              seven of them, each taller than a man, their limbs bending in too
-              many places. Ilyas let them come within reach before opening the
-              Veil.
-            </p>
-
-            <p>
-              Their bodies collapsed mid-stride. Momentum carried the remains
-              forward in a smear of bone and shadow.
-            </p>
-
-            <p>He did not slow.</p>
-
-            <p>
-              At the Avenue of Martyrs, a larger creature unfolded from the side
-              of a chapel. It had stitched the faces of priests into its wings,
-              and each face recited a different prayer in a different voice.
-              Ilyas answered with Light first, more from memory than hope.
-              Radiant fire tore through one wing, freeing three faces into
-              silence.
-            </p>
-
-            <p>The creature laughed with the remaining mouths.</p>
-
-            <p>Ilyas used Shadow on the rest.</p>
-
-            <p>
-              By the time he reached the central square, the rain had stopped
-              falling. Droplets hung motionless in the air, each reflecting a
-              different version of the sky. In one, the sun still shone. In
-              another, Karthain had never been built. In another, Ilyas saw
-              himself as a young priest standing beside Selka’s son, both of
-              them alive, both of them smiling.
-            </p>
-
-            <p>He crushed that droplet in his fist.</p>
-
-            <p>The Veiled Sovereign waited beneath the Rift.</p>
-
-            <p>
-              It was not monstrous in the way demons were monstrous. It had no
-              stable body, no horns, no throne of skulls. It was absence shaped
-              by intention. Limbs formed and unformed around a center too dark
-              to perceive. Eyes opened across its silhouette, then sank back
-              into nothing. When it spoke, every corpse in the square turned its
-              head toward Ilyas.
-            </p>
-
-            <p>“You have carried us carefully,” it said.</p>
-
-            <p>
-              Ilyas tightened his grip on the staff. “I used what I needed.”
-            </p>
-
-            <p>
-              “Yes,” said the Sovereign. “That is what hunger calls restraint.”
-            </p>
-
-            <p>
-              The battle began without motion. Pressure struck Ilyas hard enough
-              to shatter the stones behind him. He answered with Radiant
-              Severance, carving a line of Light through the Sovereign’s torso.
-              The wound opened onto stars. Something inside the creature
-              laughed.
-            </p>
-
-            <p>Voidborne rose from every corpse in the square.</p>
-
-            <p>
-              Ilyas moved through them like a plague with intent. Light in his
-              right hand, Shadow in his left, he burned and drained and broke.
-              For every creature he destroyed, the Sovereign pulled another
-              shape from the dead. For every spell he cast, the Rift widened.
-            </p>
-
-            <p>
-              The Sovereign did not fight like an enemy. It fought like a truth
-              correcting a lie.
-            </p>
-
-            <p>
-              It showed him Mira crawling across the catacomb floor. It showed
-              him Bren coughing blood into his palms. It showed him Selka
-              reaching for ash. Each vision arrived with the force of a weapon,
-              and each one made the Veil inside him flare in answer.
-            </p>
-
-            <p>
-              “You think guilt makes you different from us,” the Sovereign said.
-              “It does not. Guilt is only hunger that has learned to mourn.”
-            </p>
-
-            <p>
-              Ilyas drove his staff into the ground. Light spread from the
-              impact in a circle, pure and brilliant, forcing the Voidborne
-              back. For a breath, he saw the square as it had once been:
-              merchants shouting, children running, bells ringing from a tower
-              that still stood.
-            </p>
-
-            <p>Then the Light cracked.</p>
-
-            <p>
-              He was tired. Not physically. The Veil had made that almost
-              meaningless. He was tired of measuring the cost of each life
-              against the next. Tired of restraint. Tired of pretending balance
-              was noble when balance had only ever meant letting something
-              survive long enough to hurt him again.
-            </p>
-
-            <p>The Sovereign leaned close without moving.</p>
-
-            <p>“Stop borrowing,” it said. “Be honest.”</p>
-
-            <p>
-              Ilyas looked beyond it to the Rift. If it widened, the world would
-              not end quickly. It would be rewritten piece by piece until no one
-              remembered there had been a world to save.
-            </p>
-
-            <p>
-              He could continue as he was. He could fight as a man with two
-              powers and lose when one failed to restrain the other.
-            </p>
-
-            <p>
-              Or he could stop pretending he was still choosing between them.
-            </p>
-
-            <p>Ilyas released the Light.</p>
-
-            <p>
-              For the first time, he did not command the Shadow. He did not
-              shape it into a spell or pull it through a narrow wound. He opened
-              every guarded part of himself and let the Veil find no resistance.
-            </p>
-
-            <p>The result was not darkness.</p>
-
-            <p>It was silence.</p>
-
-            <p>
-              The square went still. The hanging droplets fell upward. The
-              remaining Voidborne folded into themselves without sound. The
-              Sovereign recoiled, and in that recoil Ilyas saw fear.
-            </p>
-
-            <p>Not because he had become stronger than it.</p>
-
-            <p>Because he had become familiar.</p>
-
-            <p>
-              Ilyas stepped forward and placed one hand against the Sovereign’s
-              center. The creature tried to expand, to become vast enough to
-              escape being held, but the Veil inside Ilyas was no longer a
-              borrowed thread. It was a door opened from both sides.
-            </p>
-
-            <p>He absorbed the Sovereign slowly.</p>
-
-            <p>
-              The scream lasted long enough for every bell in Karthain to ring
-              once.
-            </p>
-
-            <p>Then the Rift sealed.</p>
-          </article>
-
-          <aside
-            class="aside-stack"
-            aria-label="Gameplay notes for Chapter VII"
-          >
-            <div class="game-card">
-              <div class="game-label">Final Encounter</div>
-              <h3>The Veiled Sovereign</h3>
-              <ul>
-                <li>Phase 1: Voidborne packs test area control and sustain.</li>
-                <li>
-                  Phase 2: Memory assaults force narrative callbacks to prior
-                  casualties.
-                </li>
-                <li>
-                  Phase 3: Light/Shadow balance fails under Rift pressure.
-                </li>
-                <li>
-                  Final mechanic presents surrender to the Veil as the only
-                  survivable solution.
-                </li>
-              </ul>
-            </div>
-            <div class="dm-choice">
-              <strong>Dungeon Master Choice</strong>
               <p>
-                The Sovereign opens inside your mind like a second sky. You can
-                still fight as a man. You can still lose as one.
+                The boy was seven. Ilyas remembered the baptism. He remembered
+                the child laughing because the water had been cold. Now the
+                boy’s jaw hung open too far, and something black and wet moved
+                behind his teeth.
               </p>
-              <p class="spoken-choice">
-                If Ilyas stops resisting the Veil, he will not borrow its
-                darkness. He will become the place it enters the world.
-              </p>
-              <span class="choice">Stop resisting</span>
-            </div>
-          </aside>
-        </div>
-      </section>
 
-      <section class="chapter">
-        <div class="chapter-header">
-          <div class="chapter-number">Chapter VIII</div>
-          <h2>Aftermath</h2>
-        </div>
-        <div class="story-grid">
-          <article class="story">
-            <p>Dawn came late to Karthain.</p>
+              <p>“Father,” the boy said, though three voices spoke with him.</p>
 
-            <p>
-              When the sun finally rose, it found the city alive in the way a
-              battlefield is alive after the killing stops. People emerged from
-              cellars, wells, crypts, and collapsed houses. Some wept at the
-              sky. Some searched the dead. Some saw Ilyas standing in the
-              central square and fell to their knees.
-            </p>
+              <p>Ilyas lifted his hand and called the Light.</p>
 
-            <p>He hated them for that.</p>
-
-            <p>
-              Not because they were wrong. Because they were still close enough
-              to be hurt.
-            </p>
-
-            <p>
-              High Inquisitor Vareen survived until morning. Ilyas found her
-              sitting against the base of a broken statue, one hand pressed to
-              the wound in her side. She watched him approach with the calm of
-              someone who had already spent her fear.
-            </p>
-
-            <p>“Is it done?” she asked.</p>
-
-            <p>“Yes.”</p>
-
-            <p>“Are you?”</p>
-
-            <p>Ilyas did not answer.</p>
-
-            <p>Vareen smiled faintly. “That is what I thought.”</p>
-
-            <p>
-              He could have healed her. Once, the instinct would have moved
-              faster than thought. Even now, he felt the shape of the spell
-              waiting in him. He could close the wound, steady her heart, pull
-              her back from the edge.
-            </p>
-
-            <p>
-              He could also feel the refugees gathering behind him. Children.
-              Mothers. Old men. Survivors with cracked lips and hopeful eyes.
-            </p>
-
-            <p>
-              If he reached for Vareen, the Aura would answer. It always
-              answered. Maybe only one person nearby would weaken. Maybe ten.
-              Maybe the child staring at him from behind an overturned cart
-              would simply grow cold and never understand why.
-            </p>
-
-            <p>Vareen saw the calculation in his face.</p>
-
-            <p>“There he is,” she whispered.</p>
-
-            <p>Ilyas stepped back.</p>
-
-            <p>
-              The High Inquisitor closed her eyes, and after a while her
-              breathing stopped.
-            </p>
-
-            <p>No one thanked him after that.</p>
-
-            <p>
-              A woman approached near the south gate with a wounded boy in her
-              arms. The boy’s leg had been crushed beneath stone. His face was
-              gray with shock, but he was alive. The woman fell to her knees in
-              front of Ilyas and begged without words, lifting the child like an
-              offering.
-            </p>
-
-            <p>
-              Ilyas looked at the boy. Then at the crowd behind her. Then at the
-              frost forming along the edges of his own shadow.
-            </p>
-
-            <p>He turned and walked away.</p>
-
-            <p>
-              The woman screamed after him. Others cursed. Someone threw a
-              stone. It struck his shoulder and fell harmlessly to the road.
-            </p>
-
-            <p>Ilyas did not look back.</p>
-
-            <p>
-              Beyond Karthain, the world was quieter. Fields bent beneath pale
-              wind. Crows avoided the road ahead of him. By noon, the city was
-              only smoke on the horizon.
-            </p>
-
-            <p>
-              He no longer sought absolution. He no longer feared condemnation.
-              Good and evil were words for people who could afford company, for
-              those who still believed a clean choice was simply waiting to be
-              found.
-            </p>
-
-            <p>Ilyas had saved the world.</p>
-
-            <p>Now the world would have to survive him at a distance.</p>
-          </article>
-
-          <aside
-            class="aside-stack"
-            aria-label="Gameplay notes for Chapter VIII"
-          >
-            <div class="game-card void">
-              <div class="game-label">Legendary Item</div>
-              <h3>Worldrender Crook</h3>
               <p>
-                Two-headed staff of Light and Shadow. Its upper prong glows
-                faintly when near the dying. Its lower prong drinks that glow
-                away.
+                It came, as it always had. Gold fire burst from his palm and
+                struck the child in the chest. For one terrible instant, the boy
+                looked human again. His eyes cleared. His mouth shaped a word
+                that may have been <em>mother</em>.
               </p>
-              <ul>
-                <li>+Shadow Power</li>
-                <li>+Spell Sustain</li>
-                <li>Unlocks Veil Synchronization dialogue options</li>
-                <li>
-                  Healing spells now trigger Aura risk checks near civilians
-                </li>
-              </ul>
-              <p class="flavor">
-                “He tried to save the world. The world simply stopped arguing
-                with him.”
+
+              <p>Then he became ash.</p>
+
+              <p>
+                The nave erupted. Some parishioners fled toward the doors.
+                Others fell to their knees and prayed. The corrupted among them
+                moved faster than dying bodies should have moved, hurling
+                themselves at the living with the boneless desperation of
+                drowning men.
               </p>
-            </div>
-            <div class="game-card">
-              <div class="game-label">NPC Bark</div>
-              <h3>Capital Survivor</h3>
-              <p>“Do not thank him. Do not curse him. Let him pass.”</p>
-            </div>
-          </aside>
-        </div>
-      </section>
 
-      <div class="divider"></div>
+              <p>
+                Ilyas fought from the aisle to the altar, one burst of Light at
+                a time. He severed corruption from flesh when he could. When he
+                could not, he burned both together. The cathedral filled with
+                heat and screaming. Wax ran down the candles in thick streams.
+                Blood steamed on the marble.
+              </p>
 
-      <section class="ending-card" id="legend">
-        <div class="kicker">Legend Entry</div>
-        <h2>Ilyas, The Eclipse</h2>
-        <p>
-          <strong>Class:</strong> Shadowbound Priest &nbsp; | &nbsp;
-          <strong>Alignment:</strong> Unaffiliated &nbsp; | &nbsp;
-          <strong>Trait:</strong> Proximity drains vitality. Isolation amplifies
-          power.
-        </p>
-        <p><em>He began by fighting evil. He ended by redefining it.</em></p>
-      </section>
-    </main>
+              <p>
+                Selka crawled through the chaos, clutching the ash that had been
+                her son. A Husked Devout saw her move and turned.
+              </p>
+
+              <p>
+                Ilyas had enough strength to save her or to hold the eastern
+                doors where twenty civilians were trapped behind fallen pews.
+              </p>
+
+              <p>He chose the doors.</p>
+
+              <p>
+                By the time the bells finally rang, they were not being pulled
+                by hands. They swung in the wind from the broken tower, tolling
+                over a courtyard filled with the dead.
+              </p>
+
+              <p>
+                That evening, the survivors called him blessed. They kissed his
+                sleeves. They thanked him for saving the cathedral.
+              </p>
+
+              <p>
+                Ilyas looked at the blackened shape of Selka near the altar
+                steps and understood something that would never leave him.
+              </p>
+
+              <p>The Light was merciful.</p>
+
+              <p>It was not enough.</p>
+
+              <div class="chapter-pagination">
+                <a href="#top">
+                  <span>Back</span>
+                  Intro
+                </a>
+                <a href="chapter-2.html">
+                  <span>Next</span>
+                  Chapter II: The Veil Beneath the Altar
+                </a>
+              </div>
+            </article>
+
+            <aside
+              class="chapter-sidebar"
+              aria-label="Gameplay notes for Chapter I"
+            >
+              <div class="game-card">
+                <div class="game-label">Opening Encounter</div>
+                <h3>Ashen Cathedral</h3>
+                <p><strong>Enemy Type:</strong> Husked Devout</p>
+                <ul>
+                  <li>
+                    Corrupted civilians force the player to choose between
+                    cleansing, containment, and mercy kills.
+                  </li>
+                  <li>
+                    Rescue objectives are mutually exclusive, introducing moral
+                    triage early.
+                  </li>
+                  <li>
+                    NPC deaths create later reputation and dialogue
+                    consequences.
+                  </li>
+                </ul>
+              </div>
+
+              <div class="game-card">
+                <div class="game-label">Ability</div>
+                <h3>Radiant Severance</h3>
+                <p>
+                  Channel Light in a focused arc. Corrupted targets are purified
+                  or destroyed based on corruption severity.
+                </p>
+                <ul>
+                  <li>High damage to undead and void-touched enemies.</li>
+                  <li>
+                    Minor recovery pulse to the player or nearby companions.
+                  </li>
+                  <li>Repeated use applies Exhaustion.</li>
+                </ul>
+                <p><em>“Mercy is clean only when seen from far away.”</em></p>
+              </div>
+
+              <div class="game-card">
+                <div class="game-label">Design Function</div>
+                <h3>Opening Moral Triage</h3>
+                <p>
+                  Chapter I establishes the core theme before Shadow enters the
+                  kit: even holy power cannot save everyone at once.
+                </p>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="continue-title">
+          <div class="section-kicker">Continue the Descent</div>
+          <h2 id="continue-title">Next pages</h2>
+          <div class="card-grid">
+            <a class="nav-card" href="chapter-2.html">
+              <span>Chapter II</span>
+              <strong>The Veil Beneath the Altar</strong>
+              <p>The first deliberate step toward forbidden power.</p>
+            </a>
+
+            <a class="nav-card" href="codex.html">
+              <span>Codex</span>
+              <strong>Ilyas as a playable character concept</strong>
+              <p>
+                Character identity, core rules, build paths, and design pillars.
+              </p>
+            </a>
+
+            <a class="nav-card" href="details.html">
+              <span>System Details</span>
+              <strong>Abilities, traits, and tuning</strong>
+              <p>
+                A deeper design-facing breakdown of the Shadowbound systems.
+              </p>
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>Aura of Attrition. Shadowbound character and RPG systems concept.</p>
+      </footer>
+    </div>
   </body>
 </html>
