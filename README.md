@@ -1,7 +1,9 @@
 # Aura of Attrition
 
-A dark fantasy short story presented as an interactive, Diablo-inspired narrative experience.
+A dark fantasy short story presented as an interactive narrative experience.
 Built as a multi-page project combining storytelling, RPG systems, and UI-driven design.
+
+A character design narrative exploring power, proximity, and consequence.
 
 ---
 
@@ -28,7 +30,7 @@ https://upt3mpo.github.io/shadowbound/
 
 ## Overview
 
-Aura of Attrition follows Ilyas, a priest who begins as a servant of the Light and slowly transforms into something else entirely. The experience is presented as a structured narrative arc supported by explicit gameplay systems and design breakdowns.
+Aura of Attrition follows Ilyas, a priest who begins as a servant of the Light and gradually transforms into something far more dangerous. The experience is structured as a narrative arc supported by explicit gameplay systems and design breakdowns.
 
 The project blends:
 
@@ -52,12 +54,12 @@ The project blends:
 
 ## Purpose
 
-Portfolio piece focused on:
+Portfolio piece demonstrating:
 
-- Narrative Design
-- Game Design (RPG)
-- Systems Design
-- Character and gameplay design
+- Narrative design through structured character arcs
+- RPG system design grounded in player-facing mechanics
+- Systems thinking, including tradeoffs, tuning, and failure cases
+- Character design expressed through gameplay identity
 
 ---
 
