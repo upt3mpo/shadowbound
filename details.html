@@ -14,7 +14,7 @@
           <span class="site-brand__title">Aura of Attrition</span>
         </a>
 
-        <nav class="site-nav">
+        <nav class="site-nav" aria-label="Primary navigation">
           <a href="index.html">Intro</a>
           <a href="codex.html">Codex</a>
           <a href="details.html" aria-current="page">Details</a>
@@ -23,9 +23,9 @@
 
       <main>
         <!-- HERO -->
-        <section class="hero">
+        <section class="hero" aria-labelledby="page-title">
           <div class="hero__kicker">System Breakdown</div>
-          <h1>Ability & System Details</h1>
+          <h1 id="page-title">Ability & System Details</h1>
           <p class="hero__subtitle">
             A deeper look at abilities, traits, tuning levers, item hooks, and
             encounter behavior for a dark RPG character concept.
@@ -66,8 +66,8 @@
                   <tr>
                     <td>Targeting</td>
                     <td>
-                      Prioritizes enemies, can include companions or friendly
-                      NPCs
+                      Prioritizes enemies, can include companions, bystanders,
+                      or friendly NPCs
                     </td>
                   </tr>
                   <tr>
@@ -90,6 +90,10 @@
           <div class="card-grid">
             <div class="card">
               <h3>Radiant Severance</h3>
+              <p>
+                A safer Light-based tool used to stabilize pressure without
+                escalating collateral drain.
+              </p>
               <ul>
                 <li>Short cooldown ability</li>
                 <li>High burst damage to corrupted enemies</li>
@@ -100,6 +104,10 @@
 
             <div class="card">
               <h3>Grasp of the Veil</h3>
+              <p>
+                A higher-output Shadow tool that rewards dense positioning while
+                exposing the cost of nearby life as fuel.
+              </p>
               <ul>
                 <li>Moderate cooldown ability</li>
                 <li>Converts nearby vitality into Shadow burst</li>
@@ -113,6 +121,10 @@
 
             <div class="card">
               <h3>Veil Expansion</h3>
+              <p>
+                A high-risk escalation tool for resolving dangerous moments at
+                the cost of greater proximity pressure.
+              </p>
               <ul>
                 <li>Long cooldown ability</li>
                 <li>Expands aura radius significantly</li>
@@ -252,6 +264,48 @@
               <p>
                 As aura intensity increases, nearby units should show visible
                 signs of strain to reinforce the cost of positioning.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- FAILURE CASES -->
+        <section class="section">
+          <div class="section-kicker">Design Risks</div>
+          <h2>Failure Cases to Avoid</h2>
+
+          <div class="card-grid">
+            <div class="card">
+              <h3>Hidden Penalties</h3>
+              <p>
+                Friendly drain should never feel invisible. Players need clear
+                feedback when nearby units are being affected.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Unfair Companion Harm</h3>
+              <p>
+                Companion risk should create tension, not punishment. Target
+                bias, spacing tools, and trait options should give players ways
+                to manage the cost.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Runaway Pack Scaling</h3>
+              <p>
+                Dense enemy packs should feel rewarding without allowing the
+                character to bypass all encounter pacing or boss mechanics.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Passive Play</h3>
+              <p>
+                Defensive builds should still require movement, timing, and
+                target decisions instead of letting the aura solve encounters by
+                itself.
               </p>
             </div>
           </div>

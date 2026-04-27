@@ -14,7 +14,7 @@
           <span class="site-brand__title">Aura of Attrition</span>
         </a>
 
-        <nav class="site-nav">
+        <nav class="site-nav" aria-label="Primary navigation">
           <a href="index.html">Intro</a>
           <a href="chapter-8.html">Final Chapter</a>
           <a href="codex.html" aria-current="page">Codex</a>
@@ -24,9 +24,9 @@
 
       <main>
         <!-- HERO -->
-        <section class="hero">
+        <section class="hero" aria-labelledby="page-title">
           <div class="hero__kicker">Character Codex</div>
-          <h1>The Shadowbound</h1>
+          <h1 id="page-title">The Shadowbound</h1>
           <p class="hero__subtitle">
             A dark support-oriented RPG character concept whose power scales
             with nearby life. Strength increases with proximity. So does the
@@ -44,39 +44,6 @@
             around pressure, conversion, enemy density, and controlled
             collateral risk.
           </p>
-          <!-- DESIGN GOALS -->
-          <section class="section">
-            <div class="section-kicker">Design Goals</div>
-            <h2>What This Character Is Built To Test</h2>
-
-            <div class="card-grid">
-              <div class="card">
-                <h3>Readable Power With Visible Cost</h3>
-                <p>
-                  Strong moments should feel immediate and satisfying, while the
-                  cost remains clear enough for players to understand why their
-                  positioning matters.
-                </p>
-              </div>
-
-              <div class="card">
-                <h3>Positioning As Consequence</h3>
-                <p>
-                  Movement is not only about avoiding danger. Where the
-                  character stands changes who benefits, who suffers, and how
-                  quickly an encounter resolves.
-                </p>
-              </div>
-
-              <div class="card">
-                <h3>Build Flexibility</h3>
-                <p>
-                  The concept supports aggressive drain, defensive sustain,
-                  barrier-focused survival, and safer target-bias variants.
-                </p>
-              </div>
-            </div>
-          </section>
 
           <div class="card-grid">
             <div class="card">
@@ -105,6 +72,74 @@
                 Prolonged proximity can endanger companions, friendly NPCs, or
                 protected objectives, creating tension between power and
                 restraint.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- DESIGN GOALS -->
+        <section class="section">
+          <div class="section-kicker">Design Goals</div>
+          <h2>What This Character Is Built To Test</h2>
+
+          <div class="card-grid">
+            <div class="card">
+              <h3>Readable Power With Visible Cost</h3>
+              <p>
+                Strong moments should feel immediate and satisfying, while the
+                cost remains clear enough for players to understand why their
+                positioning matters.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Positioning As Consequence</h3>
+              <p>
+                Movement is not only about avoiding danger. Where the character
+                stands changes who benefits, who suffers, and how quickly an
+                encounter resolves.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Build Flexibility</h3>
+              <p>
+                The concept supports aggressive drain, defensive sustain,
+                barrier-focused survival, and safer target-bias variants.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- NARRATIVE TO SYSTEM -->
+        <section class="section">
+          <div class="section-kicker">Narrative to System</div>
+          <h2>How the Story Becomes Play</h2>
+
+          <div class="card-grid">
+            <div class="card">
+              <h3>Mercy Becomes Triage</h3>
+              <p>
+                Early Light-based choices establish that saving everyone is
+                impossible. This makes later Shadow tools feel tempting rather
+                than arbitrary.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Power Becomes Proximity</h3>
+              <p>
+                The Veil turns nearby life into a resource, making positioning
+                both a tactical and moral decision.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Victory Becomes Consequence</h3>
+              <p>
+                The character can resolve encounters faster, but each shortcut
+                creates collateral risk that must be managed through build,
+                movement, and timing.
               </p>
             </div>
           </div>
@@ -175,7 +210,7 @@
               <h3>Controlled Attrition</h3>
               <p>
                 Smaller aura radius, stronger enemy targeting, and safer sustain
-                for longer dungeon runs or companion-heavy play.
+                for longer encounters or companion-heavy play.
               </p>
             </div>
 

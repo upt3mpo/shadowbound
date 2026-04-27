@@ -1,8 +1,5 @@
-
-
 :root {
   --bg: #07080b;
-  --bg-soft: #10131a;
   --bg-card: #151922;
   --bg-card-hover: #1b2130;
   --text: #e8e2d8;
@@ -16,8 +13,6 @@
   --danger: #d56d6d;
   --shadow: #8a63d2;
   --light: #f3dfaa;
-  --radius-sm: 0.45rem;
-  --radius-md: 0.75rem;
   --radius-lg: 1rem;
   --max-width: 1120px;
   --page-padding: clamp(1.25rem, 3vw, 2.5rem);
@@ -64,11 +59,6 @@ a:hover,
 a:focus-visible {
   color: var(--light);
   text-decoration: underline;
-}
-
-img {
-  display: block;
-  max-width: 100%;
 }
 
 .page-shell {
@@ -167,44 +157,6 @@ img {
   line-height: 1.55;
 }
 
-.hero__actions,
-.chapter-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.85rem;
-  margin-top: 1.75rem;
-}
-
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.85rem;
-  padding: 0.7rem 1rem;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text);
-  font-family: var(--font-ui);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.button:hover,
-.button:focus-visible {
-  background: rgba(182, 140, 255, 0.14);
-  border-color: rgba(182, 140, 255, 0.55);
-  color: var(--light);
-  text-decoration: none;
-}
-
-.button--primary {
-  background: linear-gradient(135deg, rgba(182, 140, 255, 0.26), rgba(214, 176, 109, 0.14));
-  border-color: rgba(182, 140, 255, 0.58);
-}
-
 .section {
   padding: clamp(2rem, 4vw, 3.5rem) 0;
   border-top: 1px solid var(--line);
@@ -253,6 +205,8 @@ img {
   color: var(--accent-strong);
   font-size: 1.22rem;
   line-height: 1.55;
+  font-style: italic;
+  letter-spacing: 0.02em;
 }
 
 .chapter-sidebar {
