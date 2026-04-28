@@ -175,6 +175,92 @@
           </div>
         </section>
 
+        <!-- BUILD SCENARIOS -->
+        <section class="section">
+          <div class="section-kicker">Build Scenarios</div>
+          <h2>How Each Archetype Plays in Practice</h2>
+
+          <div class="card-grid">
+            <div class="card">
+              <h3>Controlled Attrition</h3>
+              <p><strong>Scenario: prolonged boss fight</strong></p>
+              <p>
+                The player maintains distance from companions throughout the
+                encounter. With a smaller radius and stronger target bias, the
+                aura drains only enemies. Output is steady rather than
+                explosive.
+              </p>
+              <p>
+                When the boss summons adds, the player repositions to cover them
+                with the aura rather than spiking with Grasp of the Veil.
+                Sustain conversion keeps health stable across a long fight.
+                There are no burst windows, but there is also no collateral
+                pressure on allies and no recovery moments required after
+                overextending.
+              </p>
+              <p>
+                The tradeoff is visible in this scenario: the player survives
+                cleanly but deals less damage than a Veil Reaper build would
+                during the add phase. The choice between safety and output is
+                made at trait selection, not in the fight.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Veil Reaper</h3>
+              <p><strong>Scenario: dense enemy pack</strong></p>
+              <p>
+                The player positions at the center of a six-target pack. The
+                aura ramps quickly across all units. At peak drain intensity,
+                with enough stacks built across the pack, the player commits
+                Grasp of the Veil. Damage scales with affected units and
+                delivers a large spike.
+              </p>
+              <p>
+                The risk is immediate. Any companions inside the radius take
+                strain during the ramp. The player needs to time the burst
+                before repositioning away from allies, or accept that companions
+                will recover on their own while the window closes.
+              </p>
+              <p>
+                Selka's Blackened Veil amplifies this pattern significantly:
+                each recently drained target increases Grasp's damage, turning
+                the setup phase into a direct multiplier on the payoff. The
+                sustain penalty means the player cannot afford to stay in the
+                pack too long after the burst lands.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Hollow Saint</h3>
+              <p>
+                <strong>Scenario: sustained pressure over 30 seconds</strong>
+              </p>
+              <p>
+                The player faces ongoing damage without a clear burst moment to
+                exploit. Aura drain converts continuously to barrier rather than
+                output. Radiant Severance is used for recovery pulses between
+                incoming hits. Grasp of the Veil is held for genuine emergencies
+                rather than offensive windows.
+              </p>
+              <p>
+                The player survives through conversion efficiency rather than
+                positioning aggression. Kill speed is lower than Veil Reaper in
+                this scenario, but the player is still functional when
+                companions are not present and the aura has fewer targets to
+                pull from.
+              </p>
+              <p>
+                The design test for this archetype is whether it still requires
+                decisions. Defensive builds should not passively solve
+                encounters. The player still needs to manage when to use Radiant
+                Severance, when to hold barrier, and when the drain cost of
+                proximity outweighs the conversion benefit.
+              </p>
+            </div>
+          </div>
+        </section>
+
         <!-- ENCOUNTER DESIGN -->
         <section class="section">
           <div class="section-kicker">Encounter Design</div>
@@ -208,6 +294,20 @@
                 Aura of Attrition no longer drains companions, but its enemy
                 drain ramp is slower.
               </p>
+              <p>
+                This item removes the core collateral risk for players who want
+                to operate in party content without managing proximity tension.
+                The tradeoff is meaningful: slower enemy ramp means burst
+                windows take longer to reach, and the ceiling from dense enemy
+                pulls is reduced. The character becomes safer but loses the
+                explosive potential that proximity pressure creates.
+              </p>
+              <p>
+                Pairs with Controlled Attrition traits. Named after the sealed
+                gate Ilyas found beneath the cathedral in Chapter II, the thing
+                he chose to open. The item is the version of that choice he did
+                not make: bounded, safer, and slower.
+              </p>
             </div>
 
             <div class="card">
@@ -216,6 +316,20 @@
                 Grasp of the Veil deals increased damage for each recently
                 drained enemy, but reduces sustain conversion.
               </p>
+              <p>
+                Creates a setup-payoff loop inside Grasp itself: the player
+                builds drain stacks across the pack first, then commits to the
+                burst for amplified output. The cost is real. Sustain conversion
+                drops, so the character trades self-preservation for damage.
+                Overextending into a dense pull without managing health becomes
+                genuinely dangerous.
+              </p>
+              <p>
+                Pairs with Veil Reaper traits. Named after the mother Ilyas
+                failed in Chapter I. The item carries the logic of that moment:
+                you gain more from what you drain, but you lose the ability to
+                protect yourself while doing it.
+              </p>
             </div>
 
             <div class="card">
@@ -223,6 +337,22 @@
               <p>
                 Radiant Severance briefly marks enemies. Marked enemies feed
                 Aura of Attrition at increased efficiency.
+              </p>
+              <p>
+                Creates a meaningful bridge between the Light and Shadow tools.
+                Players who alternate between Radiant Severance and the aura are
+                rewarded over players who default to pure Shadow spam. The
+                tradeoff is a cooldown dependency: the efficiency window
+                requires Radiant Severance to be available, and the Exhaustion
+                penalty must be managed across targets rather than stacked on
+                one.
+              </p>
+              <p>
+                Pairs with hybrid builds across any archetype. Named after the
+                cathedral bells that rang after the Chapter I massacre without
+                anyone pulling them. The item ties the beginning of Ilyas’s
+                story: Light, prayer, the cathedral, to the Shadow system built
+                around it.
               </p>
             </div>
           </div>
