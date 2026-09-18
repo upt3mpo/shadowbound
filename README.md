@@ -5,10 +5,6 @@ Built as a multi-page project combining storytelling, RPG systems, and UI-driven
 
 A character design narrative exploring power, proximity, and consequence.
 
----
-
-## Live Preview
-
 https://upt3mpo.github.io/shadowbound/
 
 ---
